@@ -5,7 +5,12 @@ using System.Threading.Tasks;
 
 namespace FerreteriaGHome.Web.Data.Entities
 {
+
+
     public class Products
     {
+
+
+
     }
 }

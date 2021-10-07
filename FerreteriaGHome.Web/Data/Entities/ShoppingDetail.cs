@@ -7,5 +7,10 @@ namespace FerreteriaGHome.Web.Data.Entities
 {
     public class ShoppingDetail
     {
+
+
+
+
+
     }
 }
