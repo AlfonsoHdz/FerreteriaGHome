@@ -8,7 +8,7 @@ namespace FerreteriaGHome.Web.Data.Entities
     using System.ComponentModel.DataAnnotations;
     using System.Collections.Generic;
 
-    public class Clients
+    public class Clients:IEntity
     {
         [Display(Name = "Id")]
         public int Id { get; set; }

@@ -5,15 +5,8 @@ using System.Threading.Tasks;
 
 namespace FerreteriaGHome.Web.Data.Entities
 {
-    using System.ComponentModel.DataAnnotations;
-
-    public class Products
+    interface IEntity
     {
-
-         
-
-
-
-
+        int Id { get; set; }
     }
 }
