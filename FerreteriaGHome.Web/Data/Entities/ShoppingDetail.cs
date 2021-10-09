@@ -32,6 +32,10 @@ namespace FerreteriaGHome.Web.Data.Entities
         [Display(Name = "Fecha de la Compra")]
         public string DateShoppingDC { get; set; }
 
+        public ICollection<Products> Products { get; set; }
+
+        public ICollection<Shopping> Shoppings { get; set; }
+
 
 
 

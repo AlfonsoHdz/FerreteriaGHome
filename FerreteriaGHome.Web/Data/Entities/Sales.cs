@@ -29,5 +29,13 @@ namespace FerreteriaGHome.Web.Data.Entities
         [Display(Name = "Costo de la Venta")]
         public string costV { get; set; }
 
+
+
+        public ICollection<Clients> Clients { get; set; }
+
+        public SalesAgent SalesAgent { get; set; }
+
+        public SaleDetail SaleDetail { get; set; }
+
     }
 }

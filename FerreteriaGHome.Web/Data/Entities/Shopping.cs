@@ -37,6 +37,9 @@ namespace FerreteriaGHome.Web.Data.Entities
         [Display(Name = "Total")]
         public double Total { get; set; }
 
+        public Provider Provider { get; set; }
+
+        public ShoppingDetail ShoppingDetail { get; set; }
 
 
     }

@@ -29,6 +29,10 @@ namespace FerreteriaGHome.Web.Data.Entities
         public double priceV { get; set; }
 
 
+        public ICollection<Sales> Sales { get; set; }
+
+        public Products Products { get; set; }
+
 
     }
 }

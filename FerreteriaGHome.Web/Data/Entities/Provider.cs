@@ -37,6 +37,8 @@ namespace FerreteriaGHome.Web.Data.Entities
         [Display(Name = "Correo")]
         public string emailPro { get; set; }
 
+        public ICollection<Shopping> Shoppings { get; set; }
+
 
 
 
