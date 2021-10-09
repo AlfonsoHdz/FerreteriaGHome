@@ -15,7 +15,7 @@ namespace FerreteriaGHome.Web.Data.Entities
 
         public User User { get; set; }
 
-        public Sales Sale { get; set; }
+        
 
 
      

@@ -5,7 +5,40 @@ using System.Threading.Tasks;
 
 namespace FerreteriaGHome.Web.Data.Entities
 {
-    public class Provider
+    using System.ComponentModel.DataAnnotations;
+
+    public class Provider : IEntity 
     {
+        [Display(Name = "Id")]
+        public int Id { get; set; }
+
+        [Required]
+        [MaxLength(300)]
+        [Display(Name = "Nombre")]
+        public string namePro { get; set; }
+
+        [Required]
+        [MaxLength(300)]
+        [Display(Name = "Apellido")]
+        public string lastNamePro { get; set; }
+
+        [Required]
+        [MaxLength(300)]
+        [Display(Name = "Direccion")]
+        public string addressPro { get; set; }
+
+        [Required]
+        [MaxLength(10)]
+        [Display(Name = "Telefono")]
+        public int telephone { get; set; }
+
+        [Required]
+        [MaxLength(300)]
+        [Display(Name = "Correo")]
+        public string emailPro { get; set; }
+
+
+
+
     }
 }
