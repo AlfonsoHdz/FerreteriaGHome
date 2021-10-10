@@ -1,0 +1,48 @@
+﻿@model FerreteriaGHome.Web.Data.Entities.Provider
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Provider</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="namePro" class="control-label"></label>
+                <input asp-for="namePro" class="form-control" />
+                <span asp-validation-for="namePro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="addressPro" class="control-label"></label>
+                <input asp-for="addressPro" class="form-control" />
+                <span asp-validation-for="addressPro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="telephone" class="control-label"></label>
+                <input asp-for="telephone" class="form-control" />
+                <span asp-validation-for="telephone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="emailPro" class="control-label"></label>
+                <input asp-for="emailPro" class="form-control" />
+                <span asp-validation-for="emailPro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
