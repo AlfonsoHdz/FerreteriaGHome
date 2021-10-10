@@ -12,14 +12,33 @@
 <table class="table table-hover table-light">
     <thead>
         <tr>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.PhoneNumber)
+            </th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-light">Edit</a>
+                @Html.DisplayFor(modelItem => item.User.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.PhoneNumber)
+            </td>
+
+
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-dark">Edit</a>
                 <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info">Details</a>
                 <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">Delete</a>
             </td>

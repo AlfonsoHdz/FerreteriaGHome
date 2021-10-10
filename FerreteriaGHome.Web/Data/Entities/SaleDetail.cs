@@ -24,7 +24,7 @@ namespace FerreteriaGHome.Web.Data.Entities
         public string Date { get; set; }
 
         [Required]
-        [MaxLength(10)]
+     
         [Display(Name = "Precio de la Venta")]
         public double priceV { get; set; }
 

@@ -28,12 +28,12 @@ namespace FerreteriaGHome.Web.Data.Entities
         public string DatoShopping { get; set; }
 
         [Required]
-        [MaxLength(10)]
+       
         [Display(Name = "IVA")]
         public double IVA { get; set; }
 
         [Required]
-        [MaxLength(10)]
+       
         [Display(Name = "Total")]
         public double Total { get; set; }
 

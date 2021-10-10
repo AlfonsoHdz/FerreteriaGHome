@@ -23,7 +23,7 @@ namespace FerreteriaGHome.Web.Data.Entities
         public string descripcionP { get; set; }
 
         [Required]
-        [MaxLength(10)]
+        
         [Display(Name = "Precio del Producto")]
         public double priceP { get; set; }
 

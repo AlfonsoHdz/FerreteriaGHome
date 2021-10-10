@@ -47,7 +47,7 @@ namespace FerreteriaGHome.Web.Data
             if (!this.dataContext.SalesAgents.Any())
             {
                 var user = await CheckUser("Juan", "Mendez", "222526287", "juan@gmail.com", "123456");
-                await CheckSalesAgent(user, "SaleAgent");
+                await CheckSalesAgent(user, "SalesAgent");
 
             }
 

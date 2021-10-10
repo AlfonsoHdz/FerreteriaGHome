@@ -18,12 +18,12 @@ namespace FerreteriaGHome.Web.Data.Entities
         public string descripcionDC { get; set; }
 
         [Required]
-        [MaxLength(10)]
+       
         [Display(Name = "Costo de la Compra")]
         public double costC { get; set; }
 
         [Required]
-        [MaxLength(100)]
+       
         [Display(Name = "Cantidad")]
         public int Quantity { get; set; }
 

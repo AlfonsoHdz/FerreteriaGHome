@@ -25,7 +25,7 @@ namespace FerreteriaGHome.Web.Data.Entities
         public string addressPro { get; set; }
 
         [Required]
-        [MaxLength(100)]
+       
         [Display(Name = "Telefono")]
         public long telephone { get; set; }
 
