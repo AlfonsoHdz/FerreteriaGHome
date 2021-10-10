@@ -10,22 +10,22 @@ using FerreteriaGHome.Web.Data.Entities;
 
 namespace FerreteriaGHome.Web.Controllers
 {
-    public class ShoppingsController : Controller
+    public class ClientsController : Controller
     {
         private readonly DataContext _context;
 
-        public ShoppingsController(DataContext context)
+        public ClientsController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: Shoppings
+        // GET: Clients
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Shoppings.ToListAsync());
+            return View(await _context.Clients.ToListAsync());
         }
 
-        // GET: Shoppings/Details/5
+        // GET: Clients/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace FerreteriaGHome.Web.Controllers
                 return NotFound();
             }
 
-            var shopping = await _context.Shoppings
+            var clients = await _context.Clients
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (shopping == null)
+            if (clients == null)
             {
                 return NotFound();
             }
 
-            return View(shopping);
+            return View(clients);
         }
 
-        // GET: Shoppings/Create
+        // GET: Clients/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Shoppings/Create
+        // POST: Clients/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Folio,DatoShopping,IVA,Total")] Shopping shopping)
+        public async Task<IActionResult> Create([Bind("Id")] Clients clients)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(shopping);
+                _context.Add(clients);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(shopping);
+            return View(clients);
         }
 
-        // GET: Shoppings/Edit/5
+        // GET: Clients/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace FerreteriaGHome.Web.Controllers
                 return NotFound();
             }
 
-            var shopping = await _context.Shoppings.FindAsync(id);
-            if (shopping == null)
+            var clients = await _context.Clients.FindAsync(id);
+            if (clients == null)
             {
                 return NotFound();
             }
-            return View(shopping);
+            return View(clients);
         }
 
-        // POST: Shoppings/Edit/5
+        // POST: Clients/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Folio,DatoShopping,IVA,Total")] Shopping shopping)
+        public async Task<IActionResult> Edit(int id, [Bind("Id")] Clients clients)
         {
-            if (id != shopping.Id)
+            if (id != clients.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace FerreteriaGHome.Web.Controllers
             {
                 try
                 {
-                    _context.Update(shopping);
+                    _context.Update(clients);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ShoppingExists(shopping.Id))
+                    if (!ClientsExists(clients.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace FerreteriaGHome.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(shopping);
+            return View(clients);
         }
 
-        // GET: Shoppings/Delete/5
+        // GET: Clients/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace FerreteriaGHome.Web.Controllers
                 return NotFound();
             }
 
-            var shopping = await _context.Shoppings
+            var clients = await _context.Clients
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (shopping == null)
+            if (clients == null)
             {
                 return NotFound();
             }
 
-            return View(shopping);
+            return View(clients);
         }
 
-        // POST: Shoppings/Delete/5
+        // POST: Clients/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var shopping = await _context.Shoppings.FindAsync(id);
-            _context.Shoppings.Remove(shopping);
+            var clients = await _context.Clients.FindAsync(id);
+            _context.Clients.Remove(clients);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ShoppingExists(int id)
+        private bool ClientsExists(int id)
         {
-            return _context.Shoppings.Any(e => e.Id == id);
+            return _context.Clients.Any(e => e.Id == id);
         }
     }
 }
