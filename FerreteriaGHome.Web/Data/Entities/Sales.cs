@@ -27,7 +27,7 @@ namespace FerreteriaGHome.Web.Data.Entities
         [Required]
         [MaxLength(20)]
         [Display(Name = "Costo de la Venta")]
-        public string costV { get; set; }
+        public double costV { get; set; }
 
 
 

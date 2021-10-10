@@ -1,6 +1,11 @@
+using FerreteriaGHome.Web.Data;
+using FerreteriaGHome.Web.Data.Entities;
+using FerreteriaGHome.Web.Helper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -16,6 +21,7 @@ namespace FerreteriaGHome.Web
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
         }
 
         public IConfiguration Configuration { get; }
@@ -23,6 +29,38 @@ namespace FerreteriaGHome.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddIdentity<User, IdentityRole>(cfg =>
+
+            {
+
+                cfg.User.RequireUniqueEmail = true;
+
+                cfg.Password.RequireDigit = false;
+
+                cfg.Password.RequiredUniqueChars = 0;
+
+                cfg.Password.RequireLowercase = false;
+
+                cfg.Password.RequireNonAlphanumeric = false;
+
+                cfg.Password.RequireUppercase = false;
+
+                cfg.Password.RequiredLength = 6; //123456
+
+            })
+
+           .AddEntityFrameworkStores<DataContext>();
+
+            services.AddDbContext<DataContext>(cfg =>
+            {
+
+                cfg.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+
+            });
+
+            //Inyeccion de codigo
+            services.AddTransient<Seeder>();
+            services.AddScoped<IUserHelper, UserHelper>();
             services.AddControllersWithViews();
         }
 
@@ -52,6 +90,7 @@ namespace FerreteriaGHome.Web
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
         }
     }
 }

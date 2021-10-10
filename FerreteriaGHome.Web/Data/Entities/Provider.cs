@@ -17,10 +17,7 @@ namespace FerreteriaGHome.Web.Data.Entities
         [Display(Name = "Nombre")]
         public string namePro { get; set; }
 
-        [Required]
-        [MaxLength(300)]
-        [Display(Name = "Apellido")]
-        public string lastNamePro { get; set; }
+       
 
         [Required]
         [MaxLength(300)]
@@ -28,9 +25,9 @@ namespace FerreteriaGHome.Web.Data.Entities
         public string addressPro { get; set; }
 
         [Required]
-        [MaxLength(10)]
+        [MaxLength(100)]
         [Display(Name = "Telefono")]
-        public int telephone { get; set; }
+        public long telephone { get; set; }
 
         [Required]
         [MaxLength(300)]

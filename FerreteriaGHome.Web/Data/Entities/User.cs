@@ -8,37 +8,23 @@ namespace FerreteriaGHome.Web.Data.Entities
     using Microsoft.AspNetCore.Identity;
     using System.ComponentModel.DataAnnotations;
 
-    public class User:IEntity
+    public class User: IdentityUser
     {
-        [Display(Name = "Id")]
-        public int Id { get; set; }
-
-        [Required]
-        [MaxLength(300)]
+        [Required(ErrorMessage = "{0} es obligatorio.")]
+        [MaxLength(100, ErrorMessage = "El campo {0} no puede tener más de {1} caracteres.")]
         [Display(Name = "Nombre")]
-        public string firstnameU { get; set; }
+        public string FirstName { get; set; }
 
-        [Required]
-        [MaxLength(300)]
-        [Display(Name = "Apellido")]
-        public string lastNameU { get; set; }
+        [Required(ErrorMessage = "{0} es obligatorio.")]
+        [MaxLength(100, ErrorMessage = "El campo {0} no puede tener más de {1} caracteres.")]
+        [Display(Name = "Apellidos")]
+        public string LastName { get; set; }
 
-        [Required]
-        [MaxLength(300)]
-        [Display(Name = "Direccion")]
-        public string addressU { get; set; }
-
-        [Required]
-        [MaxLength(10)]
+        [MaxLength(100, ErrorMessage = "El campo {0} no puede tener más de {1} caracteres.")]
         [Display(Name = "Telefono")]
-        public int telephoneU { get; set; }
+        public override string PhoneNumber { get; set; }
 
-        [Required]
-        [MaxLength(300)]
-        [Display(Name = "Correo")]
-        public string emailU { get; set; }
-
-        [Display(Name = "Nombre Completo")]
-        public string FullName => $"{lastNameU} {firstnameU}";
+        [Display(Name = "Nombre")]
+        public string FullName => $"{LastName} {FirstName}";
     }
 }

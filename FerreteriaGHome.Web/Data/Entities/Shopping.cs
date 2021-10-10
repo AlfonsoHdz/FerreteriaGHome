@@ -15,12 +15,12 @@ namespace FerreteriaGHome.Web.Data.Entities
         [Required]
         [MaxLength(300)]
         [Display(Name = "Folio de la Compra")]
-        public string Folio { get; set; }
+        public int Folio { get; set; }
 
-        [Required]
-        [MaxLength(300)]
-        [Display(Name = "Obervaciones de la Compra")]
-        public string Observation { get; set; }
+        //[Required]
+        //[MaxLength(300)]
+        //[Display(Name = "Obervaciones de la Compra")]
+        //public string Observation { get; set; }
 
         [Required]
         [MaxLength(300)]

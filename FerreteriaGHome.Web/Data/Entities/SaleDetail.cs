@@ -20,8 +20,8 @@ namespace FerreteriaGHome.Web.Data.Entities
 
         [Required]
         [MaxLength(10)]
-        [Display(Name = "Año")]
-        public int yearV { get; set; }
+        [Display(Name = "Fecha de venta")]
+        public string Date { get; set; }
 
         [Required]
         [MaxLength(10)]

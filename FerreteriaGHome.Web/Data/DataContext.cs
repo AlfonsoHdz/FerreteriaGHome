@@ -9,7 +9,7 @@ namespace FerreteriaGHome.Web.Data
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
-    public class DataContext
+    public class DataContext: IdentityDbContext<User>
     {
         public DbSet<Clients> Clients { get; set; }
 
@@ -22,9 +22,15 @@ namespace FerreteriaGHome.Web.Data
 
         public DbSet<Shopping> Shoppings { get; set; }
         public DbSet<ShoppingDetail> ShoppingDetails { get; set; }
-      
 
 
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
+
+        {
+
+        }
+
+        //TODO: sobreescribir el metodo onmodelcreating para la eliminacion de cascada
 
 
     }
