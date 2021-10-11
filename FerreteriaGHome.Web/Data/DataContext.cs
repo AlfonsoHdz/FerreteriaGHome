@@ -11,14 +11,14 @@ namespace FerreteriaGHome.Web.Data
 
     public class DataContext: IdentityDbContext<User>
     {
-        public DbSet<Clients> Clients { get; set; }
+        public DbSet<Client> Clients { get; set; }
 
-        public DbSet<Products> Products { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         public DbSet<Provider> Providers { get; set; }
         public DbSet<SaleDetail> SaleDetails { get; set; }
-        public DbSet<Sales> Sales { get; set; }
-        public DbSet<SalesAgent> SalesAgents { get; set; }
+        public DbSet<Sale> Sales { get; set; }
+        public DbSet<SaleAgent> SalesAgents { get; set; }
 
         public DbSet<Shopping> Shoppings { get; set; }
         public DbSet<ShoppingDetail> ShoppingDetails { get; set; }

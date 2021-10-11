@@ -7,7 +7,7 @@ namespace FerreteriaGHome.Web.Data.Entities
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class ShoppingDetail:IEntity
+    public class ShoppingDetail : IEntity
     {
         [Display(Name = "Id")]
         public int Id { get; set; }
@@ -15,26 +15,26 @@ namespace FerreteriaGHome.Web.Data.Entities
         [Required]
         [MaxLength(300)]
         [Display(Name = "Descripcion del detalle de la Compra")]
-        public string descripcionDC { get; set; }
+        public string Descripcion { get; set; }
 
         [Required]
-       
+
         [Display(Name = "Costo de la Compra")]
-        public double costC { get; set; }
+        public decimal Cost { get; set; }
 
         [Required]
-       
+
         [Display(Name = "Cantidad")]
         public int Quantity { get; set; }
 
         [Required]
         [MaxLength(300)]
         [Display(Name = "Fecha de la Compra")]
-        public string DateShoppingDC { get; set; }
+        public DateTime Date { get; set; }
 
-        public ICollection<Products> Products { get; set; }
+        public Product Product { get; set; }
 
-        public ICollection<Shopping> Shoppings { get; set; }
+        public Shopping Shoppings { get; set; }
 
 
 

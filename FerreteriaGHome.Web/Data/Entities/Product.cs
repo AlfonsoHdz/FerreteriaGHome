@@ -7,7 +7,8 @@ namespace FerreteriaGHome.Web.Data.Entities
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class Products:IEntity
+    //TODO: Cambiar el nombre clase Products a singular
+    public class Product : IEntity
     {
         [Display(Name = "Id")]
         public int Id { get; set; }
@@ -15,22 +16,26 @@ namespace FerreteriaGHome.Web.Data.Entities
         [Required]
         [MaxLength(100)]
         [Display(Name = "Nombre del Producto")]
-        public string nameP { get; set; }
+
+        //TODO: Eliminar P y Mayuscula inicial
+        public string Name { get; set; }
 
         [Required]
         [MaxLength(300)]
         [Display(Name = "Descripcion del Producto")]
-        public string descripcionP { get; set; }
+        //TODO: Eliminar P y Mayuscula
+        public string Descripcion { get; set; }
 
         [Required]
-        
+
         [Display(Name = "Precio del Producto")]
-        public double priceP { get; set; }
+        //TODO: Eliminar P y Mayuscula
+        //Cambiar a tipo decimal
+        public decimal Price { get; set; }
 
 
         public ICollection<SaleDetail> SaleDetail { get; set; }
-
-        public ShoppingDetail ShoppingDetail { get; set; }
+        public ICollection<ShoppingDetail> ShoppingDetails { get; set; }
 
 
 

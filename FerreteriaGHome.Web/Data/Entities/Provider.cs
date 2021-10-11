@@ -7,7 +7,7 @@ namespace FerreteriaGHome.Web.Data.Entities
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class Provider : IEntity 
+    public class Provider : IEntity
     {
         [Display(Name = "Id")]
         public int Id { get; set; }
@@ -15,24 +15,22 @@ namespace FerreteriaGHome.Web.Data.Entities
         [Required]
         [MaxLength(300)]
         [Display(Name = "Nombre")]
-        public string namePro { get; set; }
-
-       
+        public string Name { get; set; }
 
         [Required]
         [MaxLength(300)]
         [Display(Name = "Direccion")]
-        public string addressPro { get; set; }
+        public string Address { get; set; }
 
         [Required]
-       
+
         [Display(Name = "Telefono")]
-        public long telephone { get; set; }
+        public long Telephone { get; set; }
 
         [Required]
         [MaxLength(300)]
         [Display(Name = "Correo")]
-        public string emailPro { get; set; }
+        public string Email { get; set; }
 
         public ICollection<Shopping> Shoppings { get; set; }
 

@@ -8,17 +8,16 @@ namespace FerreteriaGHome.Web.Data.Entities
     using System.ComponentModel.DataAnnotations;
     using System.Collections.Generic;
 
-    public class SalesAgent:IEntity
+    public class SaleAgent : IEntity
     {
         [Display(Name = "Id")]
         public int Id { get; set; }
 
-
         public User User { get; set; }
 
-        public ICollection<Sales> Sales { get; set; }
+        public ICollection<Sale> Sales { get; set; }
 
-        
+
 
     }
 }

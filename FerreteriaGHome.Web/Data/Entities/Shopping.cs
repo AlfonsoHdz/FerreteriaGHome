@@ -17,25 +17,20 @@ namespace FerreteriaGHome.Web.Data.Entities
         [Display(Name = "Folio de la Compra")]
         public int Folio { get; set; }
 
-        //[Required]
-        //[MaxLength(300)]
-        //[Display(Name = "Obervaciones de la Compra")]
-        //public string Observation { get; set; }
-
         [Required]
         [MaxLength(300)]
         [Display(Name = "Dato de la Compra")]
         public string DatoShopping { get; set; }
 
         [Required]
-       
+
         [Display(Name = "IVA")]
-        public double IVA { get; set; }
+        public decimal IVA { get; set; }
 
         [Required]
-       
+
         [Display(Name = "Total")]
-        public double Total { get; set; }
+        public decimal Total { get; set; }
 
         public Provider Provider { get; set; }
 

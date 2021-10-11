@@ -54,7 +54,7 @@ namespace FerreteriaGHome.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,nameP,descripcionP,priceP")] Products products)
+        public async Task<IActionResult> Create([Bind("Id,nameP,descripcionP,priceP")] Product products)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace FerreteriaGHome.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,nameP,descripcionP,priceP")] Products products)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,nameP,descripcionP,priceP")] Product products)
         {
             if (id != products.Id)
             {

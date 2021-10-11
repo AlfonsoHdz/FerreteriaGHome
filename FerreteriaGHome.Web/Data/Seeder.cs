@@ -10,7 +10,7 @@ namespace FerreteriaGHome.Web.Data
     using System.Linq;
     using FerreteriaGHome.Web.Helper;
     using Microsoft.AspNetCore.Identity;
-    
+
 
     public class Seeder
     {
@@ -28,7 +28,7 @@ namespace FerreteriaGHome.Web.Data
             await dataContext.Database.EnsureCreatedAsync();
 
             //Roles de usuario
-           
+
             await userHelper.CheckRoleAsync("Client");
             await userHelper.CheckRoleAsync("SalesAgent");
 
@@ -41,7 +41,7 @@ namespace FerreteriaGHome.Web.Data
 
                 var user = await CheckUser("Pedro", "Palacios", "22262824", "palacios@gmail.com", "543211");
                 await CheckClients(user, "Client");
-                
+
             }
 
             if (!this.dataContext.SalesAgents.Any())
@@ -55,16 +55,16 @@ namespace FerreteriaGHome.Web.Data
             //
             if (!this.dataContext.Products.Any())
             {
-                await CheckProducts("Pinzas",  "Pinzas de tipo Presión",  164.25);
-                await CheckProducts("Tornillos", "Negros tipo tabla roca", 12.63);
-                await CheckProducts("Chapa", "Chapa de color Mate con seguro", 155.80);
-                await CheckProducts("Llave de Cruz", "Llave tipo de cruz", 90.5);
-                await CheckProducts("Martillo", "Clavo grueso", 100.55);
+                await CheckProducts("Pinzas", "Pinzas de tipo Presión", 25);
+                await CheckProducts("Tornillos", "Negros tipo tabla roca", 12);
+                await CheckProducts("Chapa", "Chapa de color Mate con seguro", 155);
+                await CheckProducts("Llave de Cruz", "Llave tipo de cruz", 90);
+                await CheckProducts("Martillo", "Clavo grueso", 100);
 
             }
             if (!this.dataContext.Providers.Any())
             {
-                await CheckProviders("Trupper",  "Puebla,Pue Col Margaritas No 23", 2225634582, "trupper@hotmail.com");
+                await CheckProviders("Trupper", "Puebla,Pue Col Margaritas No 23", 2225634582, "trupper@hotmail.com");
                 await CheckProviders("Voltek", "Puebla,Pue Col Carmen No 425", 5569423584, "voltek@hotmail.com");
                 await CheckProviders("JabonesPro", "Puebla,Pue Col Santiago Momoxpan No 40", 5566842487, "jabonespro2021@outlook.com");
                 await CheckProviders("TuercasMartinez", "Puebla,Pue Infonavit Las Margaritas", 2223475861, "tuercassuper@gmail.com");
@@ -72,88 +72,88 @@ namespace FerreteriaGHome.Web.Data
 
             if (!this.dataContext.SaleDetails.Any())
             {
-                await CheckSaleDetail("Jabon Zote",  "09/06/21",  25.41);
-                await CheckSaleDetail("Llave de cruz", "04/06/21", 50.63);
+                await CheckSaleDetail("Jabon Zote", DateTime.Now, 25);
+                await CheckSaleDetail("Llave de cruz", DateTime.Now, 50);
             }
 
             if (!this.dataContext.Sales.Any())
             {
-                await CheckSales("22/02/21",  "Venta de Manguera de Gas 40cm",  89.45);
-                await CheckSales("14/02/2021", "Venta de paquete de tuercas", 500);
+                await CheckSales(DateTime.Now, "Venta de Manguera de Gas 40cm", 89);
+                await CheckSales(DateTime.Now, "Venta de paquete de tuercas", 500);
             }
 
             if (!this.dataContext.Shoppings.Any())
             {
-                await CheckShopping(22069,  "Paquete de taquetes de Madera",  55.42*.16,  55.42);
-                await CheckShopping(54871, "Paquete de tornillo",584.25*.16, 584.25);
+                await CheckShopping(22069, "Paquete de taquetes de Madera", 16, 55);
+                await CheckShopping(54871, "Paquete de tornillo", 16, 584);
             }
             if (!this.dataContext.ShoppingDetails.Any())
             {
-                await CheckShoppingDetais("Taquetes de medida 4mm",  86.5,  5,  "15/04/21");
-                await CheckShoppingDetais("Tornillos de tablaroca de media pulgada", 50, 5, "08/04/2021" );
+                await CheckShoppingDetais("Taquetes de medida 4mm", 86, 5, DateTime.Now);
+                await CheckShoppingDetais("Tornillos de tablaroca de media pulgada", 50, 5, DateTime.Now);
             }
         }
 
 
         private async Task CheckClients(User user, string rol)
         {
-            this.dataContext.Clients.Add(new Clients { User = user });
+            this.dataContext.Clients.Add(new Client { User = user });
             await this.dataContext.SaveChangesAsync();
             await userHelper.AddUserToRoleAsync(user, rol);
         }
 
         private async Task CheckSalesAgent(User user, string rol)
         {
-            this.dataContext.SalesAgents.Add(new SalesAgent { User = user });
+            this.dataContext.SalesAgents.Add(new SaleAgent { User = user });
             await this.dataContext.SaveChangesAsync();
             await userHelper.AddUserToRoleAsync(user, rol);
         }
 
-       
+
 
         //
 
         //Metodos
         //
-        private async Task CheckProducts(string name, string descripcionP, double priceP)
+        private async Task CheckProducts(string name, string descripcion, decimal price)
         {
-            this.dataContext.Products.Add(new Products { nameP = name, descripcionP = descripcionP, priceP = priceP });
+            this.dataContext.Products.Add(new Product { Name = name, Descripcion = descripcion, Price = price });
 
             await this.dataContext.SaveChangesAsync();
         }
 
-        private async Task CheckProviders(string NamePro, string AddresPro, long Telephone, string EmailPro)
+        private async Task CheckProviders(string name, string addres, long telephone, string email)
         {
-            this.dataContext.Providers.Add(new Provider { namePro = NamePro, addressPro = AddresPro, telephone = Telephone, emailPro = EmailPro });
+            this.dataContext.Providers.Add(new Provider { Name = name, Address = addres, Telephone = telephone, Email = email });
 
             await this.dataContext.SaveChangesAsync();
         }
 
 
-        private async Task CheckSaleDetail(string NameV, string date, double PriceV)
+        private async Task CheckSaleDetail(string name, DateTime date, decimal price)
         {
-            this.dataContext.SaleDetails.Add(new SaleDetail { nameV =NameV, Date = date, priceV = PriceV});
+            this.dataContext.SaleDetails.Add(new SaleDetail { Name = name, Date = date, Price = price });
 
             await this.dataContext.SaveChangesAsync();
         }
 
-        private async Task CheckSales(string DateSale, string DescriptionS, double CostV)
+        private async Task CheckSales(DateTime date, string description, decimal cost)
         {
-            this.dataContext.Sales.Add(new Sales { dateSale = DateSale, descriptionS = DescriptionS, costV = CostV });
+            this.dataContext.Sales.Add(new Sale { Date = date, Description = description, Cost = cost });
 
             await this.dataContext.SaveChangesAsync();
         }
 
-        private async Task CheckShopping(int folio, string datoShopping, double iVA, double total)
+        private async Task CheckShopping(int folio, string dato, decimal iva, decimal total)
         {
-            this.dataContext.Shoppings.Add(new Shopping { Folio= folio, DatoShopping=datoShopping,IVA=iVA, Total = total });
+            this.dataContext.Shoppings.Add(new Shopping { Folio = folio, DatoShopping = dato, IVA = iva, Total = total });
 
             await this.dataContext.SaveChangesAsync();
         }
 
-        private async Task CheckShoppingDetais(string descripciondc, double costc, int  quantity, string dateShoppingDC)
+        private async Task CheckShoppingDetais(string descripcion, decimal cost, int quantity, DateTime date)
         {
-            this.dataContext.ShoppingDetails.Add(new ShoppingDetail { descripcionDC = descripciondc, costC = costc, Quantity = quantity, DateShoppingDC=dateShoppingDC });
+            this.dataContext.ShoppingDetails.Add(new ShoppingDetail { Descripcion = descripcion, Cost = cost, Quantity = quantity, Date = date });
 
             await this.dataContext.SaveChangesAsync();
         }
