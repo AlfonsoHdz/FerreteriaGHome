@@ -56,7 +56,7 @@ namespace FerreteriaGHome.Web.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     namePro = table.Column<string>(maxLength: 300, nullable: false),
                     addressPro = table.Column<string>(maxLength: 300, nullable: false),
-                    telephone = table.Column<long>(maxLength: 100, nullable: false),
+                    telephone = table.Column<long>(nullable: false),
                     emailPro = table.Column<string>(maxLength: 300, nullable: false)
                 },
                 constraints: table =>
@@ -71,8 +71,8 @@ namespace FerreteriaGHome.Web.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     descripcionDC = table.Column<string>(maxLength: 300, nullable: false),
-                    costC = table.Column<double>(maxLength: 10, nullable: false),
-                    Quantity = table.Column<int>(maxLength: 100, nullable: false),
+                    costC = table.Column<double>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false),
                     DateShoppingDC = table.Column<string>(maxLength: 300, nullable: false)
                 },
                 constraints: table =>
@@ -213,7 +213,7 @@ namespace FerreteriaGHome.Web.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     nameP = table.Column<string>(maxLength: 100, nullable: false),
                     descripcionP = table.Column<string>(maxLength: 300, nullable: false),
-                    priceP = table.Column<double>(maxLength: 10, nullable: false),
+                    priceP = table.Column<double>(nullable: false),
                     ShoppingDetailId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -235,8 +235,8 @@ namespace FerreteriaGHome.Web.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Folio = table.Column<int>(maxLength: 300, nullable: false),
                     DatoShopping = table.Column<string>(maxLength: 300, nullable: false),
-                    IVA = table.Column<double>(maxLength: 10, nullable: false),
-                    Total = table.Column<double>(maxLength: 10, nullable: false),
+                    IVA = table.Column<double>(nullable: false),
+                    Total = table.Column<double>(nullable: false),
                     ProviderId = table.Column<int>(nullable: true),
                     ShoppingDetailId = table.Column<int>(nullable: true)
                 },
@@ -265,7 +265,7 @@ namespace FerreteriaGHome.Web.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     nameV = table.Column<string>(maxLength: 100, nullable: false),
                     Date = table.Column<string>(maxLength: 10, nullable: false),
-                    priceV = table.Column<double>(maxLength: 10, nullable: false),
+                    priceV = table.Column<double>(nullable: false),
                     ProductsId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -287,7 +287,7 @@ namespace FerreteriaGHome.Web.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     dateSale = table.Column<string>(maxLength: 300, nullable: false),
                     descriptionS = table.Column<string>(maxLength: 300, nullable: false),
-                    costV = table.Column<double>(maxLength: 20, nullable: false),
+                    costV = table.Column<double>(nullable: false),
                     SalesAgentId = table.Column<int>(nullable: true),
                     SaleDetailId = table.Column<int>(nullable: true)
                 },

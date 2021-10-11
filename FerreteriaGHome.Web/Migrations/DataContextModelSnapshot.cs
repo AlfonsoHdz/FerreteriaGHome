@@ -62,8 +62,7 @@ namespace FerreteriaGHome.Web.Migrations
                         .HasMaxLength(100);
 
                     b.Property<double>("priceP")
-                        .HasColumnType("float")
-                        .HasMaxLength(10);
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -95,8 +94,7 @@ namespace FerreteriaGHome.Web.Migrations
                         .HasMaxLength(300);
 
                     b.Property<long>("telephone")
-                        .HasColumnType("bigint")
-                        .HasMaxLength(100);
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -124,8 +122,7 @@ namespace FerreteriaGHome.Web.Migrations
                         .HasMaxLength(100);
 
                     b.Property<double>("priceV")
-                        .HasColumnType("float")
-                        .HasMaxLength(10);
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -148,8 +145,7 @@ namespace FerreteriaGHome.Web.Migrations
                         .HasColumnType("int");
 
                     b.Property<double>("costV")
-                        .HasColumnType("float")
-                        .HasMaxLength(20);
+                        .HasColumnType("float");
 
                     b.Property<string>("dateSale")
                         .IsRequired()
@@ -204,8 +200,7 @@ namespace FerreteriaGHome.Web.Migrations
                         .HasMaxLength(300);
 
                     b.Property<double>("IVA")
-                        .HasColumnType("float")
-                        .HasMaxLength(10);
+                        .HasColumnType("float");
 
                     b.Property<int?>("ProviderId")
                         .HasColumnType("int");
@@ -214,8 +209,7 @@ namespace FerreteriaGHome.Web.Migrations
                         .HasColumnType("int");
 
                     b.Property<double>("Total")
-                        .HasColumnType("float")
-                        .HasMaxLength(10);
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -239,12 +233,10 @@ namespace FerreteriaGHome.Web.Migrations
                         .HasMaxLength(300);
 
                     b.Property<int>("Quantity")
-                        .HasColumnType("int")
-                        .HasMaxLength(100);
+                        .HasColumnType("int");
 
                     b.Property<double>("costC")
-                        .HasColumnType("float")
-                        .HasMaxLength(10);
+                        .HasColumnType("float");
 
                     b.Property<string>("descripcionDC")
                         .IsRequired()

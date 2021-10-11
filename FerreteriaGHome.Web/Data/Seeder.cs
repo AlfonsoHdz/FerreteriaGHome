@@ -52,7 +52,6 @@ namespace FerreteriaGHome.Web.Data
             }
 
 
-
             //
             if (!this.dataContext.Products.Any())
             {

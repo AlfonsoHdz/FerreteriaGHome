@@ -22,7 +22,9 @@ namespace FerreteriaGHome.Web.Controllers
         // GET: SalesAgents
         public async Task<IActionResult> Index()
         {
-            return View(await _context.SalesAgents.ToListAsync());
+            return View(await _context.SalesAgents
+                .Include(t => t.User)
+                .ToListAsync());
         }
 
         // GET: SalesAgents/Details/5
