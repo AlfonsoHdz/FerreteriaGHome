@@ -1,12 +1,12 @@
-﻿@model FerreteriaGHome.Web.Data.Entities.Products
+﻿@model FerreteriaGHome.Web.Data.Entities.Product
 
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h1>Editar</h1>
+<h1>Edit</h1>
 
-<h4>Producto</h4>
+<h4>Product</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,26 +14,29 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="nameP" class="control-label"></label>
-                <input asp-for="nameP" class="form-control" />
-                <span asp-validation-for="nameP" class="text-danger"></span>
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="descripcionP" class="control-label"></label>
-                <input asp-for="descripcionP" class="form-control" />
-                <span asp-validation-for="descripcionP" class="text-danger"></span>
+                <label asp-for="Descripcion" class="control-label"></label>
+                <input asp-for="Descripcion" class="form-control" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="priceP" class="control-label"></label>
-                <input asp-for="priceP" class="form-control" />
-                <span asp-validation-for="priceP" class="text-danger"></span>
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-                <a asp-action="Index" class=" btn btn-outline-warning">Back to List</a>
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

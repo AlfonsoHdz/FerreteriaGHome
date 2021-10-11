@@ -1,4 +1,4 @@
-﻿@model FerreteriaGHome.Web.Data.Entities.Clients
+﻿@model FerreteriaGHome.Web.Data.Entities.Client
 
 @{
     ViewData["Title"] = "Details";
@@ -7,12 +7,12 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Clients</h4>
+    <h4>Client</h4>
     <hr />
     <dl class="row">
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-    <a asp-action="Index" class=" btn btn-outline-warning">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
 </div>

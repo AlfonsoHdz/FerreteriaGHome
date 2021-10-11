@@ -22,10 +22,7 @@ namespace FerreteriaGHome.Web.Controllers
         // GET: Clients
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Clients
-                .Include(t => t.User)
-                .ToListAsync());
-
+            return View(await _context.Clients.ToListAsync());
         }
 
         // GET: Clients/Details/5
@@ -36,14 +33,14 @@ namespace FerreteriaGHome.Web.Controllers
                 return NotFound();
             }
 
-            var clients = await _context.Clients
+            var client = await _context.Clients
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (clients == null)
+            if (client == null)
             {
                 return NotFound();
             }
 
-            return View(clients);
+            return View(client);
         }
 
         // GET: Clients/Create
@@ -57,15 +54,15 @@ namespace FerreteriaGHome.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id")] Client clients)
+        public async Task<IActionResult> Create([Bind("Id")] Client client)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(clients);
+                _context.Add(client);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(clients);
+            return View(client);
         }
 
         // GET: Clients/Edit/5
@@ -76,12 +73,12 @@ namespace FerreteriaGHome.Web.Controllers
                 return NotFound();
             }
 
-            var clients = await _context.Clients.FindAsync(id);
-            if (clients == null)
+            var client = await _context.Clients.FindAsync(id);
+            if (client == null)
             {
                 return NotFound();
             }
-            return View(clients);
+            return View(client);
         }
 
         // POST: Clients/Edit/5
@@ -89,9 +86,9 @@ namespace FerreteriaGHome.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id")] Client clients)
+        public async Task<IActionResult> Edit(int id, [Bind("Id")] Client client)
         {
-            if (id != clients.Id)
+            if (id != client.Id)
             {
                 return NotFound();
             }
@@ -100,12 +97,12 @@ namespace FerreteriaGHome.Web.Controllers
             {
                 try
                 {
-                    _context.Update(clients);
+                    _context.Update(client);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClientsExists(clients.Id))
+                    if (!ClientExists(client.Id))
                     {
                         return NotFound();
                     }
@@ -116,7 +113,7 @@ namespace FerreteriaGHome.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(clients);
+            return View(client);
         }
 
         // GET: Clients/Delete/5
@@ -127,14 +124,14 @@ namespace FerreteriaGHome.Web.Controllers
                 return NotFound();
             }
 
-            var clients = await _context.Clients
+            var client = await _context.Clients
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (clients == null)
+            if (client == null)
             {
                 return NotFound();
             }
 
-            return View(clients);
+            return View(client);
         }
 
         // POST: Clients/Delete/5
@@ -142,13 +139,13 @@ namespace FerreteriaGHome.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var clients = await _context.Clients.FindAsync(id);
-            _context.Clients.Remove(clients);
+            var client = await _context.Clients.FindAsync(id);
+            _context.Clients.Remove(client);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ClientsExists(int id)
+        private bool ClientExists(int id)
         {
             return _context.Clients.Any(e => e.Id == id);
         }

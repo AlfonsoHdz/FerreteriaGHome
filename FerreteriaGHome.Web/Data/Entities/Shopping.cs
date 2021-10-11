@@ -34,7 +34,7 @@ namespace FerreteriaGHome.Web.Data.Entities
 
         public Provider Provider { get; set; }
 
-        public ShoppingDetail ShoppingDetail { get; set; }
+        public ICollection<ShoppingDetail> ShoppingDetails { get; set; }
 
 
     }
