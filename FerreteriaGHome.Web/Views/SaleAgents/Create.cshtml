@@ -1,18 +1,17 @@
-﻿@model FerreteriaGHome.Web.Data.Entities.Client
+﻿@model FerreteriaGHome.Web.Data.Entities.SaleAgent
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Create";
 }
 
-<h1>Edit</h1>
+<h1>Create</h1>
 
-<h4>Client</h4>
+<h4>SaleAgent</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
                 <a asp-action="Index" class=" btn btn-outline-warning">Back to List</a>
