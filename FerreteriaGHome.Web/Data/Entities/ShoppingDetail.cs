@@ -28,7 +28,6 @@ namespace FerreteriaGHome.Web.Data.Entities
         public int Quantity { get; set; }
 
         [Required]
-        [MaxLength(300)]
         [Display(Name = "Fecha de la Compra")]
         public DateTime Date { get; set; }
 
