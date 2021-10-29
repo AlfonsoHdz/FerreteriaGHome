@@ -10,6 +10,9 @@ using FerreteriaGHome.Web.Data.Entities;
 
 namespace FerreteriaGHome.Web.Controllers
 {
+
+
+
     public class ProductsController : Controller
     {
         private readonly DataContext _context;

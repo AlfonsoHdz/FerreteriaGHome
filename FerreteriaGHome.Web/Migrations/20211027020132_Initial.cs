@@ -56,7 +56,9 @@ namespace FerreteriaGHome.Web.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 100, nullable: false),
                     Descripcion = table.Column<string>(maxLength: 300, nullable: false),
-                    Price = table.Column<decimal>(nullable: false)
+                    Price = table.Column<decimal>(nullable: false),
+                    ImagenUrl = table.Column<string>(nullable: true),
+                    Stock = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -252,7 +254,7 @@ namespace FerreteriaGHome.Web.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(maxLength: 300, nullable: false),
+                    Date = table.Column<DateTime>(nullable: false),
                     Description = table.Column<string>(maxLength: 300, nullable: false),
                     Cost = table.Column<decimal>(nullable: false),
                     ClientId = table.Column<int>(nullable: true),
@@ -284,7 +286,7 @@ namespace FerreteriaGHome.Web.Migrations
                     Descripcion = table.Column<string>(maxLength: 300, nullable: false),
                     Cost = table.Column<decimal>(nullable: false),
                     Quantity = table.Column<int>(nullable: false),
-                    Date = table.Column<DateTime>(maxLength: 300, nullable: false),
+                    Date = table.Column<DateTime>(nullable: false),
                     ProductId = table.Column<int>(nullable: true),
                     ShoppingsId = table.Column<int>(nullable: true)
                 },
@@ -312,7 +314,7 @@ namespace FerreteriaGHome.Web.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 100, nullable: false),
-                    Date = table.Column<DateTime>(maxLength: 10, nullable: false),
+                    Date = table.Column<DateTime>(nullable: false),
                     Price = table.Column<decimal>(nullable: false),
                     SalesId = table.Column<int>(nullable: true),
                     ProductId = table.Column<int>(nullable: true)

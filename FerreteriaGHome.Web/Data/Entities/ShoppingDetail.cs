@@ -33,6 +33,7 @@ namespace FerreteriaGHome.Web.Data.Entities
 
         public Product Product { get; set; }
 
+        //TODO: Singular
         public Shopping Shoppings { get; set; }
 
 

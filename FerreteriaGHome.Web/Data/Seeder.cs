@@ -55,11 +55,11 @@ namespace FerreteriaGHome.Web.Data
             //
             if (!this.dataContext.Products.Any())
             {
-                await CheckProducts("Pinzas", "Pinzas de tipo Presión", 25);
-                await CheckProducts("Tornillos", "Negros tipo tabla roca", 12);
-                await CheckProducts("Chapa", "Chapa de color Mate con seguro", 155);
-                await CheckProducts("Llave de Cruz", "Llave tipo de cruz", 90);
-                await CheckProducts("Martillo", "Clavo grueso", 100);
+                await CheckProducts("Pinzas", "Pinzas de tipo Presión", 25, "xxx", 5);
+                await CheckProducts("Tornillos", "Negros tipo tabla roca", 12, "xxx", 2);
+                await CheckProducts("Chapa", "Chapa de color Mate con seguro", 155, "xxx", 4);
+                await CheckProducts("Llave de Cruz", "Llave tipo de cruz", 90, "xxx", 4);
+                await CheckProducts("Martillo", "Clavo grueso", 100, "xxx", 2);
 
             }
             if (!this.dataContext.Providers.Any())
@@ -70,17 +70,20 @@ namespace FerreteriaGHome.Web.Data
                 await CheckProviders("TuercasMartinez", "Puebla,Pue Infonavit Las Margaritas", 2223475861, "tuercassuper@gmail.com");
             }
 
+            if (!this.dataContext.Sales.Any())
+            {
+                await CheckSales(DateTime.Now, "Venta de Manguera de Gas 40cm", 89);
+                await CheckSales(DateTime.Now, "Venta de paquete de tuercas", 500);
+            }
+
+
             if (!this.dataContext.SaleDetails.Any())
             {
                 await CheckSaleDetail("Jabon Zote", DateTime.Now, 25);
                 await CheckSaleDetail("Llave de cruz", DateTime.Now, 50);
             }
 
-            if (!this.dataContext.Sales.Any())
-            {
-                await CheckSales(DateTime.Now, "Venta de Manguera de Gas 40cm", 89);
-                await CheckSales(DateTime.Now, "Venta de paquete de tuercas", 500);
-            }
+           
 
             if (!this.dataContext.Shoppings.Any())
             {
@@ -115,9 +118,18 @@ namespace FerreteriaGHome.Web.Data
 
         //Metodos
         //
-        private async Task CheckProducts(string name, string descripcion, decimal price)
+        private async Task CheckProducts(string name, string descripcion, decimal price, string imagenUrl, double stock)
         {
-            this.dataContext.Products.Add(new Product { Name = name, Descripcion = descripcion, Price = price });
+            this.dataContext.Products.Add(new Product 
+            { 
+                Name = name, 
+                Descripcion = descripcion, 
+                Price = price,
+                ImagenUrl = imagenUrl,
+                Stock = stock
+                
+                
+            });
 
             await this.dataContext.SaveChangesAsync();
         }

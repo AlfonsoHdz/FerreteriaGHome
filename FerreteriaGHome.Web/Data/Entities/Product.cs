@@ -26,9 +26,15 @@ namespace FerreteriaGHome.Web.Data.Entities
         public string Descripcion { get; set; }
 
         [Required]
-
         [Display(Name = "Precio del Producto")]
         public decimal Price { get; set; }
+
+       
+        [Display(Name = "Imagen")]
+        public string ImagenUrl { get; set; }
+
+        [Display(Name = "Cantidad")]
+        public double Stock { get; set; }
 
 
         public ICollection<SaleDetail> SaleDetail { get; set; }
