@@ -49,13 +49,16 @@
         [HttpGet]
         public IActionResult Create()
         {
+            var model = new ProductViewModel
+            {
+
+            };
             return View();
         }
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Descripcion,Price")] Product product)
+        public async Task<IActionResult> Create(Product product)
         {
             if (ModelState.IsValid)
             {
