@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using FerreteriaGHome.Web.Data;
-using FerreteriaGHome.Web.Data.Entities;
-using Microsoft.AspNetCore.Authorization;
-
-namespace FerreteriaGHome.Web.Controllers
+﻿namespace FerreteriaGHome.Web.Controllers
 {
+    using FerreteriaGHome.Web.Data;
+    using FerreteriaGHome.Web.Data.Entities;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+    using System.Linq;
+    using System.Threading.Tasks;
 
-  //  [Authorize(Roles = "SalesAgent, Client")]
+    //  [Authorize(Roles = "SalesAgent, Client")]
 
     public class ProductsController : Controller
     {
@@ -23,14 +18,14 @@ namespace FerreteriaGHome.Web.Controllers
             _context = context;
         }
 
-        // GET: Products
+
         public async Task<IActionResult> Index()
         {
             return View(await _context.Products.ToListAsync());
         }
 
-        // GET: Products/Details/5
-       // [Authorize (Roles = "SalesAgent")]
+
+        // [Authorize (Roles = "SalesAgent")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -48,17 +43,16 @@ namespace FerreteriaGHome.Web.Controllers
             return View(product);
         }
 
-        // GET: Products/Create
 
-        [Authorize(Roles = "SalesAgent")]
+
+        //[Authorize(Roles = "SalesAgent")]
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Products/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Descripcion,Price")] Product product)
