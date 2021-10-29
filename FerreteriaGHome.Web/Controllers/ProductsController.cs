@@ -7,11 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FerreteriaGHome.Web.Data;
 using FerreteriaGHome.Web.Data.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FerreteriaGHome.Web.Controllers
 {
 
-
+    [Authorize(Roles = "SalesAgent, Client")]
 
     public class ProductsController : Controller
     {
@@ -29,6 +30,7 @@ namespace FerreteriaGHome.Web.Controllers
         }
 
         // GET: Products/Details/5
+        [Authorize (Roles = "SalesAgent")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -47,6 +49,8 @@ namespace FerreteriaGHome.Web.Controllers
         }
 
         // GET: Products/Create
+
+        [Authorize(Roles = "SalesAgent")]
         public IActionResult Create()
         {
             return View();
