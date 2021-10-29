@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace FerreteriaGHome.Web
 {
     public class Startup
@@ -21,7 +22,6 @@ namespace FerreteriaGHome.Web
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-
         }
 
         public IConfiguration Configuration { get; }

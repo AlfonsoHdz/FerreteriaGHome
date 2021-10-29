@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace FerreteriaGHome.Web.Controllers
 {
 
-    [Authorize(Roles = "SalesAgent, Client")]
+  //  [Authorize(Roles = "SalesAgent, Client")]
 
     public class ProductsController : Controller
     {
@@ -30,7 +30,7 @@ namespace FerreteriaGHome.Web.Controllers
         }
 
         // GET: Products/Details/5
-        [Authorize (Roles = "SalesAgent")]
+       // [Authorize (Roles = "SalesAgent")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
