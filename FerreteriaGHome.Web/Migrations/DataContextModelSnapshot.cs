@@ -4,22 +4,53 @@ using FerreteriaGHome.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FerreteriaGHome.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211029023532_Initial")]
-    partial class Initial
+    partial class DataContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.19")
+                .HasAnnotation("ProductVersion", "3.1.20")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("FerreteriaGHome.Web.Data.Entities.Admin", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Admin");
+                });
+
+            modelBuilder.Entity("FerreteriaGHome.Web.Data.Entities.Brand", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Brands");
+                });
 
             modelBuilder.Entity("FerreteriaGHome.Web.Data.Entities.Client", b =>
                 {
@@ -45,6 +76,9 @@ namespace FerreteriaGHome.Web.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("BrandId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasColumnType("nvarchar(300)")
@@ -65,6 +99,8 @@ namespace FerreteriaGHome.Web.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BrandId");
 
                     b.ToTable("Products");
                 });
@@ -189,6 +225,9 @@ namespace FerreteriaGHome.Web.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("AdminId")
+                        .HasColumnType("int");
+
                     b.Property<string>("DatoShopping")
                         .IsRequired()
                         .HasColumnType("nvarchar(300)")
@@ -208,6 +247,8 @@ namespace FerreteriaGHome.Web.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AdminId");
 
                     b.HasIndex("ProviderId");
 
@@ -457,11 +498,25 @@ namespace FerreteriaGHome.Web.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("FerreteriaGHome.Web.Data.Entities.Admin", b =>
+                {
+                    b.HasOne("FerreteriaGHome.Web.Data.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
             modelBuilder.Entity("FerreteriaGHome.Web.Data.Entities.Client", b =>
                 {
                     b.HasOne("FerreteriaGHome.Web.Data.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("FerreteriaGHome.Web.Data.Entities.Product", b =>
+                {
+                    b.HasOne("FerreteriaGHome.Web.Data.Entities.Brand", "Brand")
+                        .WithMany("Products")
+                        .HasForeignKey("BrandId");
                 });
 
             modelBuilder.Entity("FerreteriaGHome.Web.Data.Entities.Sale", b =>
@@ -495,6 +550,10 @@ namespace FerreteriaGHome.Web.Migrations
 
             modelBuilder.Entity("FerreteriaGHome.Web.Data.Entities.Shopping", b =>
                 {
+                    b.HasOne("FerreteriaGHome.Web.Data.Entities.Admin", null)
+                        .WithMany("Shoppings")
+                        .HasForeignKey("AdminId");
+
                     b.HasOne("FerreteriaGHome.Web.Data.Entities.Provider", "Provider")
                         .WithMany("Shoppings")
                         .HasForeignKey("ProviderId");

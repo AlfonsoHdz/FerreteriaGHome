@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FerreteriaGHome.Web.Data;
 using FerreteriaGHome.Web.Data.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FerreteriaGHome.Web.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ShoppingsController : Controller
     {
         private readonly DataContext _context;

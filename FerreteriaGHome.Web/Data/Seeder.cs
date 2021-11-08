@@ -31,9 +31,17 @@ namespace FerreteriaGHome.Web.Data
 
             await userHelper.CheckRoleAsync("Client");
             await userHelper.CheckRoleAsync("SalesAgent");
+            await userHelper.CheckRoleAsync("Admin");
 
 
             //Alta de usuarios
+            if (!this.dataContext.Admin.Any())
+            {
+
+                var user = await CheckUser("Jesse", "Cerezo", "22262824", "admin@gmail.com", "543211");
+                await CheckAdmin(user, "Admin");
+
+            }
 
 
             if (!this.dataContext.Clients.Any())
@@ -101,6 +109,13 @@ namespace FerreteriaGHome.Web.Data
         private async Task CheckClients(User user, string rol)
         {
             this.dataContext.Clients.Add(new Client { User = user });
+            await this.dataContext.SaveChangesAsync();
+            await userHelper.AddUserToRoleAsync(user, rol);
+        }
+
+        private async Task CheckAdmin(User user, string rol)
+        {
+            this.dataContext.Admin.Add(new Admin { User = user });
             await this.dataContext.SaveChangesAsync();
             await userHelper.AddUserToRoleAsync(user, rol);
         }

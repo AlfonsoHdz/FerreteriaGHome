@@ -49,20 +49,16 @@ namespace FerreteriaGHome.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Products",
+                name: "Brands",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(maxLength: 100, nullable: false),
-                    Descripcion = table.Column<string>(maxLength: 300, nullable: false),
-                    Price = table.Column<decimal>(nullable: false),
-                    ImagenUrl = table.Column<string>(nullable: true),
-                    Stock = table.Column<double>(nullable: false)
+                    Name = table.Column<string>(maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.PrimaryKey("PK_Brands", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -100,6 +96,25 @@ namespace FerreteriaGHome.Web.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Admin",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Admin", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Admin_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -226,6 +241,30 @@ namespace FerreteriaGHome.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(maxLength: 100, nullable: false),
+                    Descripcion = table.Column<string>(maxLength: 300, nullable: false),
+                    Price = table.Column<decimal>(nullable: false),
+                    ImagenUrl = table.Column<string>(nullable: true),
+                    Stock = table.Column<double>(nullable: false),
+                    BrandId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Products_Brands_BrandId",
+                        column: x => x.BrandId,
+                        principalTable: "Brands",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Shoppings",
                 columns: table => new
                 {
@@ -235,11 +274,18 @@ namespace FerreteriaGHome.Web.Migrations
                     DatoShopping = table.Column<string>(maxLength: 300, nullable: false),
                     IVA = table.Column<decimal>(nullable: false),
                     Total = table.Column<decimal>(nullable: false),
-                    ProviderId = table.Column<int>(nullable: true)
+                    ProviderId = table.Column<int>(nullable: true),
+                    AdminId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Shoppings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Shoppings_Admin_AdminId",
+                        column: x => x.AdminId,
+                        principalTable: "Admin",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Shoppings_Providers_ProviderId",
                         column: x => x.ProviderId,
@@ -337,6 +383,11 @@ namespace FerreteriaGHome.Web.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Admin_UserId",
+                table: "Admin",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
@@ -381,6 +432,11 @@ namespace FerreteriaGHome.Web.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Products_BrandId",
+                table: "Products",
+                column: "BrandId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SaleDetails_ProductId",
                 table: "SaleDetails",
                 column: "ProductId");
@@ -414,6 +470,11 @@ namespace FerreteriaGHome.Web.Migrations
                 name: "IX_ShoppingDetails_ShoppingsId",
                 table: "ShoppingDetails",
                 column: "ShoppingsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Shoppings_AdminId",
+                table: "Shoppings",
+                column: "AdminId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Shoppings_ProviderId",
@@ -461,6 +522,12 @@ namespace FerreteriaGHome.Web.Migrations
 
             migrationBuilder.DropTable(
                 name: "SalesAgents");
+
+            migrationBuilder.DropTable(
+                name: "Brands");
+
+            migrationBuilder.DropTable(
+                name: "Admin");
 
             migrationBuilder.DropTable(
                 name: "Providers");

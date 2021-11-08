@@ -7,28 +7,25 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FerreteriaGHome.Web.Data;
 using FerreteriaGHome.Web.Data.Entities;
-using Microsoft.AspNetCore.Authorization;
 
 namespace FerreteriaGHome.Web.Controllers
 {
-   // [Authorize(Roles = "SalesAgent, Admin")]
-
-    public class SalesController : Controller
+    public class BrandsController : Controller
     {
         private readonly DataContext _context;
 
-        public SalesController(DataContext context)
+        public BrandsController(DataContext context)
         {
             _context = context;
         }
 
-     
+        // GET: Brands
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Sales.ToListAsync());
+            return View(await _context.Brands.ToListAsync());
         }
 
-      
+        // GET: Brands/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -36,17 +33,17 @@ namespace FerreteriaGHome.Web.Controllers
                 return NotFound();
             }
 
-            var sale = await _context.Sales
+            var brand = await _context.Brands
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (sale == null)
+            if (brand == null)
             {
                 return NotFound();
             }
 
-            return View(sale);
+            return View(brand);
         }
 
-       
+        // GET: Brands/Create
         public IActionResult Create()
         {
             return View();
@@ -55,18 +52,18 @@ namespace FerreteriaGHome.Web.Controllers
       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Date,Description,Cost")] Sale sale)
+        public async Task<IActionResult> Create(Brand brand)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(sale);
+                _context.Add(brand);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(sale);
+            return View(brand);
         }
 
-        
+        // GET: Brands/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,20 +71,20 @@ namespace FerreteriaGHome.Web.Controllers
                 return NotFound();
             }
 
-            var sale = await _context.Sales.FindAsync(id);
-            if (sale == null)
+            var brand = await _context.Brands.FindAsync(id);
+            if (brand == null)
             {
                 return NotFound();
             }
-            return View(sale);
+            return View(brand);
         }
 
-      
+     
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Date,Description,Cost")] Sale sale)
+        public async Task<IActionResult> Edit(int id, Brand brand)
         {
-            if (id != sale.Id)
+            if (id != brand.Id)
             {
                 return NotFound();
             }
@@ -96,12 +93,12 @@ namespace FerreteriaGHome.Web.Controllers
             {
                 try
                 {
-                    _context.Update(sale);
+                    _context.Update(brand);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SaleExists(sale.Id))
+                    if (!BrandExists(brand.Id))
                     {
                         return NotFound();
                     }
@@ -112,10 +109,10 @@ namespace FerreteriaGHome.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(sale);
+            return View(brand);
         }
 
-     
+        // GET: Brands/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,30 +120,30 @@ namespace FerreteriaGHome.Web.Controllers
                 return NotFound();
             }
 
-            var sale = await _context.Sales
+            var brand = await _context.Brands
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (sale == null)
+            if (brand == null)
             {
                 return NotFound();
             }
 
-            return View(sale);
+            return View(brand);
         }
 
-     
+        // POST: Brands/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var sale = await _context.Sales.FindAsync(id);
-            _context.Sales.Remove(sale);
+            var brand = await _context.Brands.FindAsync(id);
+            _context.Brands.Remove(brand);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SaleExists(int id)
+        private bool BrandExists(int id)
         {
-            return _context.Sales.Any(e => e.Id == id);
+            return _context.Brands.Any(e => e.Id == id);
         }
     }
 }

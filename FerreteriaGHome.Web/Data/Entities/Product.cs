@@ -40,6 +40,8 @@ namespace FerreteriaGHome.Web.Data.Entities
         public ICollection<SaleDetail> SaleDetail { get; set; }
         public ICollection<ShoppingDetail> ShoppingDetails { get; set; }
 
+        public Brand Brand { get; set; }
+
 
 
 

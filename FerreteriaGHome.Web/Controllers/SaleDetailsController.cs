@@ -1,31 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using FerreteriaGHome.Web.Data;
-using FerreteriaGHome.Web.Data.Entities;
-
+﻿
 namespace FerreteriaGHome.Web.Controllers
 {
+    using FerreteriaGHome.Web.Data;
+    using FerreteriaGHome.Web.Data.Entities;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     public class SaleDetailsController : Controller
     {
-        private readonly DataContext _context;
+        private readonly DataContext dataContext;
 
-        public SaleDetailsController(DataContext context)
+        public SaleDetailsController(DataContext dataContext)
         {
-            _context = context;
+            this.dataContext = dataContext;
         }
 
-        // GET: SaleDetails
+
         public async Task<IActionResult> Index()
         {
-            return View(await _context.SaleDetails.ToListAsync());
+            return View(await dataContext.SaleDetails
+                .ToListAsync());
         }
 
-        // GET: SaleDetails/Details/5
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,7 +32,7 @@ namespace FerreteriaGHome.Web.Controllers
                 return NotFound();
             }
 
-            var saleDetail = await _context.SaleDetails
+            var saleDetail = await dataContext.SaleDetails
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (saleDetail == null)
             {
@@ -43,29 +42,27 @@ namespace FerreteriaGHome.Web.Controllers
             return View(saleDetail);
         }
 
-        // GET: SaleDetails/Create
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: SaleDetails/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Date,Price")] SaleDetail saleDetail)
+        public async Task<IActionResult> Create(SaleDetail saleDetail)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(saleDetail);
-                await _context.SaveChangesAsync();
+                dataContext.Add(saleDetail);
+                await dataContext.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(saleDetail);
         }
 
-        // GET: SaleDetails/Edit/5
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,7 +70,7 @@ namespace FerreteriaGHome.Web.Controllers
                 return NotFound();
             }
 
-            var saleDetail = await _context.SaleDetails.FindAsync(id);
+            var saleDetail = await dataContext.SaleDetails.FindAsync(id);
             if (saleDetail == null)
             {
                 return NotFound();
@@ -81,12 +78,10 @@ namespace FerreteriaGHome.Web.Controllers
             return View(saleDetail);
         }
 
-        // POST: SaleDetails/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Date,Price")] SaleDetail saleDetail)
+        public async Task<IActionResult> Edit(int id, SaleDetail saleDetail)
         {
             if (id != saleDetail.Id)
             {
@@ -97,8 +92,8 @@ namespace FerreteriaGHome.Web.Controllers
             {
                 try
                 {
-                    _context.Update(saleDetail);
-                    await _context.SaveChangesAsync();
+                    dataContext.Update(saleDetail);
+                    await dataContext.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -116,7 +111,7 @@ namespace FerreteriaGHome.Web.Controllers
             return View(saleDetail);
         }
 
-        // GET: SaleDetails/Delete/5
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,7 +119,7 @@ namespace FerreteriaGHome.Web.Controllers
                 return NotFound();
             }
 
-            var saleDetail = await _context.SaleDetails
+            var saleDetail = await dataContext.SaleDetails
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (saleDetail == null)
             {
@@ -134,20 +129,19 @@ namespace FerreteriaGHome.Web.Controllers
             return View(saleDetail);
         }
 
-        // POST: SaleDetails/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var saleDetail = await _context.SaleDetails.FindAsync(id);
-            _context.SaleDetails.Remove(saleDetail);
-            await _context.SaveChangesAsync();
+            var saleDetail = await dataContext.SaleDetails.FindAsync(id);
+            dataContext.SaleDetails.Remove(saleDetail);
+            await dataContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool SaleDetailExists(int id)
         {
-            return _context.SaleDetails.Any(e => e.Id == id);
+            return dataContext.SaleDetails.Any(e => e.Id == id);
         }
     }
 }

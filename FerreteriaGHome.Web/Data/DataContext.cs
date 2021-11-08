@@ -13,6 +13,8 @@ namespace FerreteriaGHome.Web.Data
     {
         public DbSet<Client> Clients { get; set; }
 
+        public DbSet<Brand> Brands { get; set; }
+
         public DbSet<Product> Products { get; set; }
 
         public DbSet<Provider> Providers { get; set; }
@@ -23,6 +25,7 @@ namespace FerreteriaGHome.Web.Data
         public DbSet<Shopping> Shoppings { get; set; }
         public DbSet<ShoppingDetail> ShoppingDetails { get; set; }
 
+        public DbSet<Admin> Admin { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
 
