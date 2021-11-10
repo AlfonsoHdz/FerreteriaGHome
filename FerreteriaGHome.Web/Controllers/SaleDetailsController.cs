@@ -50,7 +50,6 @@ namespace FerreteriaGHome.Web.Controllers
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(SaleDetail saleDetail)
         {
             if (ModelState.IsValid)
@@ -69,7 +68,6 @@ namespace FerreteriaGHome.Web.Controllers
             {
                 return NotFound();
             }
-
             var saleDetail = await dataContext.SaleDetails.FindAsync(id);
             if (saleDetail == null)
             {
@@ -80,7 +78,6 @@ namespace FerreteriaGHome.Web.Controllers
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, SaleDetail saleDetail)
         {
             if (id != saleDetail.Id)
@@ -130,7 +127,6 @@ namespace FerreteriaGHome.Web.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var saleDetail = await dataContext.SaleDetails.FindAsync(id);
@@ -138,7 +134,6 @@ namespace FerreteriaGHome.Web.Controllers
             await dataContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
         private bool SaleDetailExists(int id)
         {
             return dataContext.SaleDetails.Any(e => e.Id == id);

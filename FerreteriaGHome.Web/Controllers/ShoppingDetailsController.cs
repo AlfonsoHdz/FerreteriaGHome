@@ -10,6 +10,7 @@ namespace FerreteriaGHome.Web.Controllers
 
     public class ShoppingDetailsController : Controller
     {
+
         private readonly DataContext dataContext;
 
         public ShoppingDetailsController(DataContext dataContext)
@@ -25,32 +26,29 @@ namespace FerreteriaGHome.Web.Controllers
         }
 
 
-        //public async Task<IActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //    var shoppingDetail = await this.dataContext.ShoppingDetails
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (shoppingDetail == null)
-        //    {
-        //        return NotFound();
-        //    }
+            var shoppingDetail = await this.dataContext.ShoppingDetails
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (shoppingDetail == null)
+            {
+                return NotFound();
+            }
 
-        //    return View(shoppingDetail);
-        //}
+            return View(shoppingDetail);
+        }
 
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
-
-
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ShoppingDetail shoppingDetail)
         {
             if (ModelState.IsValid)
@@ -61,6 +59,7 @@ namespace FerreteriaGHome.Web.Controllers
             }
             return View(shoppingDetail);
         }
+
 
         public async Task<IActionResult> Edit(int? id)
         {
@@ -78,7 +77,6 @@ namespace FerreteriaGHome.Web.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, ShoppingDetail shoppingDetail)
         {
             if (id != shoppingDetail.Id)
@@ -109,34 +107,31 @@ namespace FerreteriaGHome.Web.Controllers
             return View(shoppingDetail);
         }
 
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+            var shoppingDetail = await dataContext.ShoppingDetails
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (shoppingDetail == null)
+            {
+                return NotFound();
+            }
 
-        //    var shoppingDetail = await _context.ShoppingDetails
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (shoppingDetail == null)
-        //    {
-        //        return NotFound();
-        //    }
+            return View(shoppingDetail);
+        }
 
-        //    return View(shoppingDetail);
-        //}
-
-
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var shoppingDetail = await _context.ShoppingDetails.FindAsync(id);
-        //    _context.ShoppingDetails.Remove(shoppingDetail);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var shoppingDetail = await dataContext.ShoppingDetails.FindAsync(id);
+            dataContext.ShoppingDetails.Remove(shoppingDetail);
+            await dataContext.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
 
         private bool ShoppingDetailExists(int id)
         {
