@@ -19,13 +19,13 @@ namespace FerreteriaGHome.Web.Controllers
             _context = context;
         }
 
-        // GET: Brands
+   
         public async Task<IActionResult> Index()
         {
             return View(await _context.Brands.ToListAsync());
         }
 
-        // GET: Brands/Details/5
+      
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,7 +43,7 @@ namespace FerreteriaGHome.Web.Controllers
             return View(brand);
         }
 
-        // GET: Brands/Create
+       
         public IActionResult Create()
         {
             return View();
@@ -51,7 +51,7 @@ namespace FerreteriaGHome.Web.Controllers
 
       
         [HttpPost]
-        [ValidateAntiForgeryToken]
+       
         public async Task<IActionResult> Create(Brand brand)
         {
             if (ModelState.IsValid)
@@ -63,7 +63,7 @@ namespace FerreteriaGHome.Web.Controllers
             return View(brand);
         }
 
-        // GET: Brands/Edit/5
+       
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,7 +81,7 @@ namespace FerreteriaGHome.Web.Controllers
 
      
         [HttpPost]
-        [ValidateAntiForgeryToken]
+       
         public async Task<IActionResult> Edit(int id, Brand brand)
         {
             if (id != brand.Id)
@@ -112,7 +112,7 @@ namespace FerreteriaGHome.Web.Controllers
             return View(brand);
         }
 
-        // GET: Brands/Delete/5
+        
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,9 +130,9 @@ namespace FerreteriaGHome.Web.Controllers
             return View(brand);
         }
 
-        // POST: Brands/Delete/5
+      
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+      
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var brand = await _context.Brands.FindAsync(id);
