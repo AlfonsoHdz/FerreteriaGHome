@@ -9,5 +9,6 @@ namespace FerreteriaGHome.Web.Helper
     public interface ICombosHelper
     {
         public IEnumerable<SelectListItem> GetComboBrands();
+        public IEnumerable<SelectListItem> GetComboProducts();
     }
 }
