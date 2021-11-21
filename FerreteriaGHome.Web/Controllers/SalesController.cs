@@ -55,7 +55,7 @@ namespace FerreteriaGHome.Web.Controllers
       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Date,Description,Cost")] Sale sale)
+        public async Task<IActionResult> Create( Sale sale)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace FerreteriaGHome.Web.Controllers
       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Date,Description,Cost")] Sale sale)
+        public async Task<IActionResult> Edit(int id, Sale sale)
         {
             if (id != sale.Id)
             {
