@@ -70,9 +70,6 @@ namespace FerreteriaGHome.Web.Controllers
             if (this.ModelState.IsValid)
             {
 
-
-
-
                 var user = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                 if (user == null)
                 {
@@ -224,7 +221,112 @@ namespace FerreteriaGHome.Web.Controllers
 
         }
 
-        
+
+        //[HttpGet]
+        //public async Task<IActionResult> Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var order = await this.datacontext.Orders
+        //        .Include(c => c.OrderDate)
+        //        .Include(a => a.User)
+        //        .Include(s => s.DeliveryDate)
+        //        .Include(u => u.Items)
+        //        .Include(f => f.Quantity)
+        //        .Include(p => p.Total)
+        //        .FirstOrDefaultAsync(y => y.Id == id);
+
+
+                
+        //    if (order == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    var model = new OrderViewModel
+        //    {
+
+        //        Id = order.Id,
+        //        OrderDate = order.OrderDate,
+        //        DeliveryDate = order.DeliveryDate,
+        //        User = order.User,
+               
+               
+        //        Items = this.combosHelper.GetComboItems()
+               
+        //    };
+        //    return View(model);
+        //}
+
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Edit(OrderViewModel model)
+        //{
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        var order = new Order
+        //        {
+        //            Id = model.Id,
+        //            OrderDate = model.OrderDate,
+        //            DeliveryDate = model.DeliveryDate,
+        //            User = model.User,
+
+
+        //            Items = await datacontext.OrderDetails.FindAsync(model.OrderId),
+        //            Descripcion = model.Descripcion,
+
+        //            ImagenUrl = (model.ImageFile != null ? await imageHelper.UploadImageAsync(
+        //                model.ImageFile,
+        //                model.Name,
+        //                "products") : model.ImagenUrl)
+
+        //        };
+        //        //
+        //        _context.Update(product);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+
+        //    return View(model);
+        //}
+
+
+        //public async Task<IActionResult> Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var product = await _context.Products
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (product == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return View(product);
+        //}
+
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+        //    var product = await _context.Products.FindAsync(id);
+        //    _context.Products.Remove(product);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(Index));
+        //}
+
+        //private bool OrderExists(int id)
+        //{
+        //    return datacontext.Orders.Any(e => e.Id == id);
+        //}
+
 
     }
 

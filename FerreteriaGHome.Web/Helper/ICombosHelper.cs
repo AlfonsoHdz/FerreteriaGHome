@@ -10,5 +10,7 @@ namespace FerreteriaGHome.Web.Helper
     {
         public IEnumerable<SelectListItem> GetComboBrands();
         public IEnumerable<SelectListItem> GetComboProducts();
+
+        public IEnumerable<SelectListItem> GetComboItems();
     }
 }

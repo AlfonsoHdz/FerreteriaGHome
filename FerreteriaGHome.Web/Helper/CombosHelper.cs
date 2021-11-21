@@ -10,6 +10,7 @@ namespace FerreteriaGHome.Web.Helper
     public class CombosHelper : ICombosHelper
     {
         private readonly DataContext dataContext;
+        
 
         public CombosHelper(DataContext dataContext)
         {
@@ -46,6 +47,24 @@ namespace FerreteriaGHome.Web.Helper
 
             return list;
         }
+
+
+        public IEnumerable<SelectListItem> GetComboItems()
+        {
+            var list = this.dataContext.Products.Select(b => new SelectListItem
+            {
+                Text = b.Name,
+                Value = $"{b.Id}"
+            }).ToList();
+            list.Insert(0, new SelectListItem
+            {
+                Text = "Selecciona un item",
+                Value = "0"
+            });
+
+            return list;
+        }
+
 
     }
     

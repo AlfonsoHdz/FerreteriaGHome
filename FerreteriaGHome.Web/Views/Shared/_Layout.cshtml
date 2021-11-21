@@ -29,44 +29,29 @@
                     <a class="nav-link text-dark" asp-area="" asp-controller="Brands" asp-action="Index">Marcas</a>}
                         </li>
 
-                        <li class="nav-item">
-                            @if (this.User.IsInRole("Admin"))
-                            {
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Clients" asp-action="Index">Clientes</a>}
-                        </li>
-
-                      
-
-                        <li class="nav-item">
-                            @if (this.User.IsInRole("Admin"))
-                            {
-                    <a class="nav-link text-dark" asp-area="" asp-controller="SaleAgents" asp-action="Index">Agente de Ventas</a>}
-                        </li>
-
-
-                        <li class="nav-item">
-                            @if (this.User.IsInRole("Admin"))
-                            {
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Providers" asp-action="Index">Provedores</a>}
-                        </li>
-
-                        <li class="nav-item dropdown bg-white">
-                            @if (this.User.IsInRole("Client"))
+                           <li class="nav-item dropdown bg-white">
+                            @if (this.User.IsInRole("SalesAgent") || this.User.IsInRole("Admin"))
                             {
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuarios</a>}
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Clients" asp-action="Index">Clientes</a>
+
+                                @if (this.User.IsInRole("SalesAgent") || this.User.IsInRole("Admin"))
+                                {
+                      <a class="nav-link text-dark" asp-area="" asp-controller="Clients" asp-action="Index">Clientes</a>}
                                 <div class="dropdown-divider"></div>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="SaleAgents" asp-action="Index">Agente de Ventas</a>
-
+                                <div class="dropdown-divider"></div>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Providers" asp-action="Index">Provedores</a>
                             </div>
                         </li>
+
+                       
 
                         <li class="nav-item dropdown bg-white">
                             @if (this.User.IsInRole("SalesAgent") || this.User.IsInRole("Admin"))
                             {
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ventas</a>}
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Venta/Compras</a>}
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
 
@@ -74,7 +59,8 @@
                                 {
                     <a class="nav-link text-dark" asp-area="" asp-controller="Sales" asp-action="Index">Ventas</a>}
                                 <div class="dropdown-divider"></div>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="SaleDetails" asp-action="Index">Detalle de Venta</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Shoppings" asp-action="Index">Compras</a>
+                               
 
                             </div>
                         </li>
@@ -82,10 +68,10 @@
                         <li class="nav-item dropdown bg-white">
                             @if (this.User.IsInRole("Admin"))
                             {
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Compras</a>}
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Detalles</a>}
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Shoppings" asp-action="Index">Compras</a>
+                                 <a class="nav-link text-dark" asp-area="" asp-controller="SaleDetails" asp-action="Index">Detalle de Venta</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="ShoppingDetails" asp-action="Index">Detalle de Compras</a>
 
@@ -95,7 +81,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         @if (this.User.Identity.IsAuthenticated)
                         {
-            <li>@this.User.Identity.Name</li>
+            <li style="margin-top: 7px; margin-right: 15px;">@this.User.Identity.Name</li>
                             <li>
                                 <a class="nav-link text-dark navbar-right" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
                             </li> }
@@ -133,92 +119,3 @@
 
 
 </html>
-
-
-
-
-
-
-@*<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>@ViewData["Title"] - FerreteriaGHome.Web</title>
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-    </head>
-    <body>
-        <header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-                <div class="container">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">FerreteriaGHome</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                        <ul class="navbar-nav flex-grow-1">
-
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Productos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Providers" asp-action="Index">Provedores</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Brands" asp-action="Index">Marcas</a>
-                            </li>
-
-                            <li class="nav-item dropdown bg-white">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuarios</a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Clients" asp-action="Index">Clientes</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="SaleAgents" asp-action="Index">Agente de Ventas</a>
-
-                                </div>
-                            </li>
-
-                            <li class="nav-item dropdown bg-white">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ventas</a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Sales" asp-action="Index">Ventas</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="SaleDetails" asp-action="Index">Detalle de Venta</a>
-
-                                </div>
-                            </li>
-
-                            <li class="nav-item dropdown bg-white">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Compras</a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Shoppings" asp-action="Index">Compras</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="ShoppingDetails" asp-action="Index">Detalle de Compras</a>
-
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </header>
-        <div class="container">
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
-        </div>
-
-        <footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2021 FerreteriaGHome <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacidad</a>
-            </div>
-        </footer>
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-        @RenderSection("Scripts", required: false)
-    </body>
-    </html>*@
