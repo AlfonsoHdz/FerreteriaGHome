@@ -363,7 +363,7 @@ namespace FerreteriaGHome.Web.Migrations
                         column: x => x.OrderId,
                         principalTable: "Orders",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_OrderDetails_Products_ProductId",
                         column: x => x.ProductId,

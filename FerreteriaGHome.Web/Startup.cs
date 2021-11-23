@@ -56,6 +56,7 @@ namespace FerreteriaGHome.Web
 
                 cfg.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
 
+
             });
 
             //Inyeccion de codigo

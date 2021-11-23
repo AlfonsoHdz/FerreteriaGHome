@@ -7,16 +7,21 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FerreteriaGHome.Web.Data;
 using FerreteriaGHome.Web.Data.Entities;
+using FerreteriaGHome.Web.Models;
+using FerreteriaGHome.Web.Helper;
+using Microsoft.AspNetCore.Identity;
 
 namespace FerreteriaGHome.Web.Controllers
 {
     public class SaleAgentsController : Controller
     {
         private readonly DataContext _context;
+        private readonly IUserHelper userHelper;
 
-        public SaleAgentsController(DataContext context)
+        public SaleAgentsController(DataContext context, IUserHelper userHelper)
         {
             _context = context;
+            this.userHelper = userHelper;
         }
 
         // GET: SaleAgents
@@ -27,45 +32,52 @@ namespace FerreteriaGHome.Web.Controllers
                 .ToListAsync());
         }
 
-        // GET: SaleAgents/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+       
 
-            var saleAgent = await _context.SalesAgents
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (saleAgent == null)
-            {
-                return NotFound();
-            }
-
-            return View(saleAgent);
-        }
-
-        // GET: SaleAgents/Create
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-      
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id")] SaleAgent saleAgent)
+        public async Task<IActionResult> Create(SaleAgentViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(saleAgent);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var user = await userHelper.GetUserByIdAsync(model.User.Id);
+                if (user == null)
+                {
+                    user = new User
+                    {
+                        FirstName = model.User.FirstName,
+                        LastName = model.User.LastName,
+                        PhoneNumber = model.User.PhoneNumber,
+                        Email = model.User.Email,
+                        UserName = model.User.Email
+                    };
+                    var result = await userHelper.AddUserAsync(user, "123456");
+                    await userHelper.AddUserToRoleAsync(user, "SalesAgent");
+                    if (result == IdentityResult.Success)
+                    {
+                        var saleagent = new SaleAgent
+                        {
+                            Id = model.Id,
+
+                            User = await this._context.Users.FindAsync(user.Id)
+                        };
+                        _context.Add(saleagent);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+                    ModelState.AddModelError(string.Empty, "Fallido");
+                }
             }
-            return View(saleAgent);
+            return View(model);
         }
 
-        // GET: SaleAgents/Edit/5
+
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,47 +85,53 @@ namespace FerreteriaGHome.Web.Controllers
                 return NotFound();
             }
 
-            var saleAgent = await _context.SalesAgents.FindAsync(id);
-            if (saleAgent == null)
+            var saleagent = await this._context.SalesAgents
+                .Include(u => u.User)
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            if (saleagent == null)
             {
                 return NotFound();
             }
-            return View(saleAgent);
+
+            var model = new SaleAgentViewModel
+            {
+                Id = saleagent.Id,
+                User = saleagent.User
+            };
+
+            return View(model);
         }
 
-        // POST: SaleAgents/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id")] SaleAgent saleAgent)
+        public async Task<IActionResult> Edit(SaleAgentViewModel model)
         {
-            if (id != saleAgent.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
+                var user = await this._context.Users.FindAsync(model.User.Id);
+                user.FirstName = model.User.FirstName;
+                user.LastName = model.User.LastName;
+                user.Email = model.User.Email;
+                user.PhoneNumber = model.User.PhoneNumber;
+
+                user.UserName = model.User.Email;
+
+                this._context.Update(user);
+                await _context.SaveChangesAsync();
+
+                var saleagent = new SaleAgent
                 {
-                    _context.Update(saleAgent);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!SaleAgentExists(saleAgent.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                    Id = model.Id,
+
+                    User = await this._context.Users.FindAsync(model.User.Id)
+                };
+
+                this._context.Update(saleagent);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(saleAgent);
+            return View(model);
         }
 
         // GET: SaleAgents/Delete/5

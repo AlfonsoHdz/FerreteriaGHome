@@ -11,6 +11,8 @@ namespace FerreteriaGHome.Web.Data
 
     public class DataContext: IdentityDbContext<User>
     {
+      
+
         public DbSet<Client> Clients { get; set; }
 
         public DbSet<Brand> Brands { get; set; }

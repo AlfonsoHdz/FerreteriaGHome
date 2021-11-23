@@ -28,10 +28,14 @@ namespace FerreteriaGHome.Web.Data
             await dataContext.Database.EnsureCreatedAsync();
 
             //Roles de usuario
+           
 
             await userHelper.CheckRoleAsync("Client");
             await userHelper.CheckRoleAsync("SalesAgent");
             await userHelper.CheckRoleAsync("Admin");
+
+
+          
 
 
             //Alta de usuarios
@@ -63,11 +67,11 @@ namespace FerreteriaGHome.Web.Data
             //
             if (!this.dataContext.Products.Any())
             {
-                await CheckProducts("Pinzas", "Pinzas de tipo Presión", 25, "xxx", 5);
-                await CheckProducts("Tornillos", "Negros tipo tabla roca", 12, "xxx", 2);
-                await CheckProducts("Chapa", "Chapa de color Mate con seguro", 155, "xxx", 4);
-                await CheckProducts("Llave de Cruz", "Llave tipo de cruz", 90, "xxx", 4);
-                await CheckProducts("Martillo", "Clavo grueso", 100, "xxx", 2);
+                await CheckProducts("Pinzas", "Pinzas de tipo Presión", 25, "~/images/products/Pinzas.png", 5);
+                await CheckProducts("Tornillos", "Negros tipo tabla roca", 12, "~/images/products/Tornillo.png", 2);
+                await CheckProducts("Chapa", "Chapa de color Mate con seguro", 155, "~/images/products/chapa.png", 4);
+                await CheckProducts("Llave de Cruz", "Llave tipo de cruz", 90, "~/images/products/Llave de Cruz.png", 4);
+                await CheckProducts("Martillo", "Clavo grueso", 100, "~/images/products/Martillo.png", 2);
 
             }
             if (!this.dataContext.Providers.Any())
