@@ -314,9 +314,8 @@ namespace FerreteriaGHome.Web.Migrations
                         .HasColumnType("nvarchar(300)")
                         .HasMaxLength(300);
 
-                    b.Property<int>("Folio")
-                        .HasColumnType("int")
-                        .HasMaxLength(300);
+                    b.Property<string>("Folio")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("IVA")
                         .HasColumnType("decimal(18,2)");

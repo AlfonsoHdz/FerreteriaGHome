@@ -24,7 +24,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Productos</a>
                         </li>
                         <li class="nav-item">
-                            @if (this.User.IsInRole("Admin"))
+                            @if (this.User.IsInRole("Admin") ||  this.User.IsInRole("Client"))
                         {
                             <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="Index">Ordenes</a>
                         }
@@ -47,9 +47,14 @@
                                 {
                       <a class="nav-link text-dark" asp-area="" asp-controller="Clients" asp-action="Index">Clientes</a>}
                                 <div class="dropdown-divider"></div>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="SaleAgents" asp-action="Index">Agente de Ventas</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Providers" asp-action="Index">Provedores</a>
+
+                                 @if (this.User.IsInRole("Admin"))
+                                 {
+                                      <a class="nav-link text-dark" asp-area="" asp-controller="SaleAgents" asp-action="Index">Agente de Ventas</a>
+                                      <div class="dropdown-divider"></div>
+                                     <a class="nav-link text-dark" asp-area="" asp-controller="Providers" asp-action="Index">Provedores</a>
+                                 }
+                               
                             </div>
                         </li>
 
@@ -66,7 +71,14 @@
                                 {
                     <a class="nav-link text-dark" asp-area="" asp-controller="Sales" asp-action="Index">Ventas</a>}
                                 <div class="dropdown-divider"></div>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Shoppings" asp-action="Index">Compras</a>
+
+                                 @if (this.User.IsInRole("Admin"))
+                                 {
+                                      <a class="nav-link text-dark" asp-area="" asp-controller="Shoppings" asp-action="Index">Compras</a>
+                                 }
+
+
+                               
                                
 
                             </div>

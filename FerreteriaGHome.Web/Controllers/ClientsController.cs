@@ -10,9 +10,12 @@ using FerreteriaGHome.Web.Data.Entities;
 using FerreteriaGHome.Web.Models;
 using FerreteriaGHome.Web.Helper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FerreteriaGHome.Web.Controllers
 {
+    [Authorize(Roles = "Admin, SalesAgent")]
+
     public class ClientsController : Controller
     {
         private readonly DataContext _context;

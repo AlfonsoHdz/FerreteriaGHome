@@ -7,7 +7,9 @@ namespace FerreteriaGHome.Web.Controllers
     using FerreteriaGHome.Web.Data.Entities;
     using System.Linq;
     using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Authorization;
 
+    [Authorize(Roles = "Admin")]
     public class ShoppingDetailsController : Controller
     {
 

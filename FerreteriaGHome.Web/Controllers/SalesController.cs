@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FerreteriaGHome.Web.Controllers
 {
-   // [Authorize(Roles = "SalesAgent, Admin")]
+    [Authorize(Roles = "Admin, SalesAgent")]
 
     public class SalesController : Controller
     {

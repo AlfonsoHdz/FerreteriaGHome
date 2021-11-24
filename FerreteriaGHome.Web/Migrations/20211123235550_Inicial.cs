@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FerreteriaGHome.Web.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -291,7 +291,7 @@ namespace FerreteriaGHome.Web.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Folio = table.Column<int>(maxLength: 300, nullable: false),
+                    Folio = table.Column<string>(nullable: true),
                     DatoShopping = table.Column<string>(maxLength: 300, nullable: false),
                     IVA = table.Column<decimal>(nullable: false),
                     Total = table.Column<decimal>(nullable: false),

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace FerreteriaGHome.Web.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin, Client")]
     public class OrdersController : Controller
     {
         private readonly DataContext datacontext;

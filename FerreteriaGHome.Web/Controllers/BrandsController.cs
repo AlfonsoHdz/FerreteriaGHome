@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FerreteriaGHome.Web.Data;
 using FerreteriaGHome.Web.Data.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FerreteriaGHome.Web.Controllers
 {
+    [Authorize(Roles = "Admin")]
+
     public class BrandsController : Controller
     {
         private readonly DataContext _context;
@@ -26,22 +29,7 @@ namespace FerreteriaGHome.Web.Controllers
         }
 
       
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var brand = await _context.Brands
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (brand == null)
-            {
-                return NotFound();
-            }
-
-            return View(brand);
-        }
+       
 
        
         public IActionResult Create()

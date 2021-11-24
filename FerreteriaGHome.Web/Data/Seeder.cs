@@ -68,12 +68,8 @@ namespace FerreteriaGHome.Web.Data
             if (!this.dataContext.Products.Any())
             {
                 await CheckProducts("Pinzas", "Pinzas de tipo Presión", 25, "~/images/products/Pinzas.png", 5);
-                await CheckProducts("Tornillos", "Negros tipo tabla roca", 12, "~/images/products/Tornillo.png", 2);
-                await CheckProducts("Chapa", "Chapa de color Mate con seguro", 155, "~/images/products/chapa.png", 4);
-                await CheckProducts("Llave de Cruz", "Llave tipo de cruz", 90, "~/images/products/Llave de Cruz.png", 4);
-                await CheckProducts("Martillo", "Clavo grueso", 100, "~/images/products/Martillo.png", 2);
-
             }
+
             if (!this.dataContext.Providers.Any())
             {
                 await CheckProviders("Trupper", "Puebla,Pue Col Margaritas No 23", 2225634582, "trupper@hotmail.com");
@@ -99,14 +95,22 @@ namespace FerreteriaGHome.Web.Data
 
             if (!this.dataContext.Shoppings.Any())
             {
-                await CheckShopping(22069, "Paquete de taquetes de Madera", 16, 55);
-                await CheckShopping(54871, "Paquete de tornillo", 16, 584);
+                await CheckShopping("22069", "Paquete de taquetes de Madera", 16, 55);
+                await CheckShopping("54871", "Paquete de tornillo", 16, 584);
+               
             }
             if (!this.dataContext.ShoppingDetails.Any())
             {
                 await CheckShoppingDetais("Taquetes de medida 4mm", 86, 5, DateTime.Now);
                 await CheckShoppingDetais("Tornillos de tablaroca de media pulgada", 50, 5, DateTime.Now);
             }
+
+            if (!this.dataContext.Brands.Any())
+            {
+                await CheckBrandDetais("Truper");
+                await CheckBrandDetais("Voltek");
+            }
+
         }
 
 
@@ -145,7 +149,9 @@ namespace FerreteriaGHome.Web.Data
                 Descripcion = descripcion, 
                 Price = price,
                 ImagenUrl = imagenUrl,
-                Stock = stock
+                Stock = stock,
+                
+
                 
                 
             });
@@ -175,7 +181,7 @@ namespace FerreteriaGHome.Web.Data
             await this.dataContext.SaveChangesAsync();
         }
 
-        private async Task CheckShopping(int folio, string dato, decimal iva, decimal total)
+        private async Task CheckShopping( string folio, string dato, decimal iva, decimal total)
         {
             this.dataContext.Shoppings.Add(new Shopping { Folio = folio, DatoShopping = dato, IVA = iva, Total = total });
 
@@ -185,6 +191,13 @@ namespace FerreteriaGHome.Web.Data
         private async Task CheckShoppingDetais(string descripcion, decimal cost, int quantity, DateTime date)
         {
             this.dataContext.ShoppingDetails.Add(new ShoppingDetail { Descripcion = descripcion, Cost = cost, Quantity = quantity, Date = date });
+
+            await this.dataContext.SaveChangesAsync();
+        }
+
+        private async Task CheckBrandDetais(string name)
+        {
+            this.dataContext.Brands.Add(new Brand { Name = name});
 
             await this.dataContext.SaveChangesAsync();
         }

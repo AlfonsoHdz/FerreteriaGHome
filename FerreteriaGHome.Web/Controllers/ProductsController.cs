@@ -4,13 +4,14 @@
     using FerreteriaGHome.Web.Data.Entities;
     using FerreteriaGHome.Web.Helper;
     using FerreteriaGHome.Web.Models;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.EntityFrameworkCore;
     using System.Linq;
     using System.Threading.Tasks;
 
-    //  [Authorize(Roles = "SalesAgent, Client")]
+   
 
     public class ProductsController : Controller
     {
@@ -34,7 +35,7 @@
         }
 
 
-        // [Authorize (Roles = "SalesAgent")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -54,7 +55,7 @@
 
 
 
-        //[Authorize(Roles = "SalesAgent")]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Create()
         {
@@ -94,6 +95,7 @@
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -158,7 +160,7 @@
             return View(model);
         }
 
-        
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
