@@ -26,16 +26,13 @@ namespace FerreteriaGHome.Web.Controllers
             _context = context;
             this.userHelper = userHelper;
         }
-
-        // GET: Clients
+        
         public async Task<IActionResult> Index()
         {
             return View(await _context.Clients
                 .Include(t => t.User)
                 .ToListAsync());
-        }
-
-        
+        }      
 
         [HttpGet]
         public IActionResult Create()
@@ -136,10 +133,7 @@ namespace FerreteriaGHome.Web.Controllers
             }
             return View(model);
         }
-
-
-
-        
+     
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

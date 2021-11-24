@@ -27,17 +27,12 @@ namespace FerreteriaGHome.Web.Controllers
         {
             return View(await _context.Brands.ToListAsync());
         }
-
-      
-       
-
-       
+        
         public IActionResult Create()
         {
             return View();
         }
-
-      
+        
         [HttpPost]
        
         public async Task<IActionResult> Create(Brand brand)
@@ -50,7 +45,6 @@ namespace FerreteriaGHome.Web.Controllers
             }
             return View(brand);
         }
-
        
         public async Task<IActionResult> Edit(int? id)
         {
@@ -66,7 +60,6 @@ namespace FerreteriaGHome.Web.Controllers
             }
             return View(brand);
         }
-
      
         [HttpPost]
        
@@ -99,7 +92,6 @@ namespace FerreteriaGHome.Web.Controllers
             }
             return View(brand);
         }
-
         
         public async Task<IActionResult> Delete(int? id)
         {
@@ -117,7 +109,6 @@ namespace FerreteriaGHome.Web.Controllers
 
             return View(brand);
         }
-
       
         [HttpPost, ActionName("Delete")]
       

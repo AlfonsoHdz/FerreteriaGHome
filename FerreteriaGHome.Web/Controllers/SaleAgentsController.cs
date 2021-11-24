@@ -26,7 +26,6 @@ namespace FerreteriaGHome.Web.Controllers
             this.userHelper = userHelper;
         }
 
-        // GET: SaleAgents
         public async Task<IActionResult> Index()
         {
             return View(await _context.SalesAgents
@@ -34,7 +33,6 @@ namespace FerreteriaGHome.Web.Controllers
                 .ToListAsync());
         }
 
-       
 
         [HttpGet]
         public IActionResult Create()
@@ -136,7 +134,7 @@ namespace FerreteriaGHome.Web.Controllers
             return View(model);
         }
 
-        // GET: SaleAgents/Delete/5
+        
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -154,7 +152,7 @@ namespace FerreteriaGHome.Web.Controllers
             return View(saleAgent);
         }
 
-        // POST: SaleAgents/Delete/5
+      
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

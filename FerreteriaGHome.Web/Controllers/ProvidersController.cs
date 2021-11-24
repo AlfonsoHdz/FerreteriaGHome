@@ -22,15 +22,11 @@ namespace FerreteriaGHome.Web.Controllers
             _context = context;
         }
 
-        // GET: Providers
         public async Task<IActionResult> Index()
         {
             return View(await _context.Providers.ToListAsync());
         }
 
-        
-
-        // GET: Providers/Create
         public IActionResult Create()
         {
             return View();
@@ -49,7 +45,6 @@ namespace FerreteriaGHome.Web.Controllers
             return View(provider);
         }
 
-        // GET: Providers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -97,7 +92,6 @@ namespace FerreteriaGHome.Web.Controllers
             return View(provider);
         }
 
-        // GET: Providers/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -115,7 +109,6 @@ namespace FerreteriaGHome.Web.Controllers
             return View(provider);
         }
 
-        // POST: Providers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

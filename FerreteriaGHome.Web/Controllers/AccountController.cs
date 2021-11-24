@@ -38,7 +38,6 @@ public class AccountController : Controller
         }
         return this.View(model);
     }
-
     public async Task<IActionResult> Logout()
     {
         await this.userHelper.LogoutAsync();

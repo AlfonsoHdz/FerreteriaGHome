@@ -50,6 +50,7 @@ namespace FerreteriaGHome.Web.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> Create(ShoppingDetail shoppingDetail)
         {

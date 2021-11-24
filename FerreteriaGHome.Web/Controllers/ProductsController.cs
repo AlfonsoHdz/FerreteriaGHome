@@ -87,7 +87,7 @@
                         "products"): string.Empty)
                     
                 };
-                //
+                
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -151,7 +151,7 @@
                         "products") : model.ImagenUrl)
 
                 };
-                //
+                
                 _context.Update(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

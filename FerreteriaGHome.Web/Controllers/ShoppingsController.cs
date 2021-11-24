@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FerreteriaGHome.Web.Controllers
 {
+
     [Authorize(Roles = "Admin")]
     public class ShoppingsController : Controller
     {
@@ -21,13 +22,13 @@ namespace FerreteriaGHome.Web.Controllers
             _context = context;
         }
 
-        // GET: Shoppings
+     
         public async Task<IActionResult> Index()
         {
             return View(await _context.Shoppings.ToListAsync());
         }
 
-        // GET: Shoppings/Details/5
+     
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -45,7 +46,7 @@ namespace FerreteriaGHome.Web.Controllers
             return View(shopping);
         }
 
-        // GET: Shoppings/Create
+        
         public IActionResult Create()
         {
             return View();
@@ -64,7 +65,7 @@ namespace FerreteriaGHome.Web.Controllers
             return View(shopping);
         }
 
-        // GET: Shoppings/Edit/5
+     
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -80,12 +81,9 @@ namespace FerreteriaGHome.Web.Controllers
             return View(shopping);
         }
 
-        // POST: Shoppings/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Folio,DatoShopping,IVA,Total")] Shopping shopping)
+        public async Task<IActionResult> Edit(int id,Shopping shopping)
         {
             if (id != shopping.Id)
             {
@@ -115,7 +113,7 @@ namespace FerreteriaGHome.Web.Controllers
             return View(shopping);
         }
 
-        // GET: Shoppings/Delete/5
+      
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -133,7 +131,7 @@ namespace FerreteriaGHome.Web.Controllers
             return View(shopping);
         }
 
-        // POST: Shoppings/Delete/5
+    
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
