@@ -214,6 +214,8 @@ namespace FerreteriaGHome.Web.Controllers
 
         }
 
+
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             var user = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);

@@ -14,6 +14,7 @@ namespace FerreteriaGHome.Web.Data
 
     public class Seeder
     {
+
         private readonly DataContext dataContext;
         private readonly IUserHelper userHelper;
 
@@ -64,11 +65,7 @@ namespace FerreteriaGHome.Web.Data
             }
 
 
-            //
-            if (!this.dataContext.Products.Any())
-            {
-                await CheckProducts("Pinzas", "Pinzas de tipo Presión", 25, "~/images/products/Pinzas.png", 5);
-            }
+         
 
             if (!this.dataContext.Providers.Any())
             {
@@ -135,29 +132,6 @@ namespace FerreteriaGHome.Web.Data
             await userHelper.AddUserToRoleAsync(user, rol);
         }
 
-
-
-        //
-
-        //Metodos
-        //
-        private async Task CheckProducts(string name, string descripcion, decimal price, string imagenUrl, double stock)
-        {
-            this.dataContext.Products.Add(new Product 
-            { 
-                Name = name, 
-                Descripcion = descripcion, 
-                Price = price,
-                ImagenUrl = imagenUrl,
-                Stock = stock,
-                
-
-                
-                
-            });
-
-            await this.dataContext.SaveChangesAsync();
-        }
 
         private async Task CheckProviders(string name, string addres, long telephone, string email)
         {
