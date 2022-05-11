@@ -36,20 +36,23 @@
                 <span asp-validation-for="ImageFile" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="Stock" class="control-label"></label>
                 <input asp-for="Stock" class="form-control" />
                 <span asp-validation-for="Stock" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <label asp-for="BrandId" class="control-label"></label>
                 <select asp-for="BrandId" asp-items="Model.Brands" class="form-control"></select>
                 <span asp-validation-for="Brand" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Edit" class="btn btn-primary" />
-                <a asp-action="Index" class=" btn btn-outline-warning">Back to List</a>
+                <a asp-action="Index" class=" btn btn-outline-warning"><span class="material-symbols-outlined">arrow_back</span></a>
+                <input type="submit" value="edit" class="btn btn-primary material-symbols-outlined" />
+                
+                
             </div>
+            
         </form>
     </div>
     <div class="col-md-8">

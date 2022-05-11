@@ -299,6 +299,87 @@ namespace FerreteriaGHome.Web.Migrations
                     b.ToTable("SaleDetails");
                 });
 
+            modelBuilder.Entity("FerreteriaGHome.Web.Data.Entities.SaleF", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DeliveryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("SaleFs");
+                });
+
+            modelBuilder.Entity("FerreteriaGHome.Web.Data.Entities.SaleFDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Quantity")
+                        .HasColumnType("float");
+
+                    b.Property<int?>("SaleFId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("SaleFId");
+
+                    b.ToTable("SaleFDetails");
+                });
+
+            modelBuilder.Entity("FerreteriaGHome.Web.Data.Entities.SaleFDetailTemp", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Quantity")
+                        .HasColumnType("float");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("SaleFDetailTemps");
+                });
+
             modelBuilder.Entity("FerreteriaGHome.Web.Data.Entities.Shopping", b =>
                 {
                     b.Property<int>("Id")
@@ -663,6 +744,43 @@ namespace FerreteriaGHome.Web.Migrations
                     b.HasOne("FerreteriaGHome.Web.Data.Entities.Sale", "Sales")
                         .WithMany("SaleDetails")
                         .HasForeignKey("SalesId");
+                });
+
+            modelBuilder.Entity("FerreteriaGHome.Web.Data.Entities.SaleF", b =>
+                {
+                    b.HasOne("FerreteriaGHome.Web.Data.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("FerreteriaGHome.Web.Data.Entities.SaleFDetail", b =>
+                {
+                    b.HasOne("FerreteriaGHome.Web.Data.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FerreteriaGHome.Web.Data.Entities.SaleF", null)
+                        .WithMany("Items")
+                        .HasForeignKey("SaleFId");
+                });
+
+            modelBuilder.Entity("FerreteriaGHome.Web.Data.Entities.SaleFDetailTemp", b =>
+                {
+                    b.HasOne("FerreteriaGHome.Web.Data.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FerreteriaGHome.Web.Data.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("FerreteriaGHome.Web.Data.Entities.Shopping", b =>

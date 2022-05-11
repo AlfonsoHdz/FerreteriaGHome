@@ -35,6 +35,12 @@ namespace FerreteriaGHome.Web.Data
 
         public DbSet<OrderDetailTemp> OrderDetailTemps { get; set; }
 
+        public DbSet<SaleF> SaleFs { get; set; }
+
+        public DbSet<SaleFDetail> SaleFDetails { get; set; }
+
+        public DbSet<SaleFDetailTemp> SaleFDetailTemps { get; set; }
+
         public DataContext(DbContextOptions<DataContext> options) : base(options)
 
         {
