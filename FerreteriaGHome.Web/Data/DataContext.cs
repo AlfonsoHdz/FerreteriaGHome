@@ -12,7 +12,6 @@ namespace FerreteriaGHome.Web.Data
     public class DataContext: IdentityDbContext<User>
     {
       
-
         public DbSet<Client> Clients { get; set; }
 
         public DbSet<Brand> Brands { get; set; }
@@ -40,6 +39,15 @@ namespace FerreteriaGHome.Web.Data
         public DbSet<SaleFDetail> SaleFDetails { get; set; }
 
         public DbSet<SaleFDetailTemp> SaleFDetailTemps { get; set; }
+        public DbSet<Proyect> Proyects { get; set; }
+        public DbSet<Activity> Activities { get; set; }
+        public DbSet<Sprint> Sprints { get; set; }
+        public DbSet<Priority> Priorities { get; set; }
+        public DbSet<Career> Careers { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<Student> Students { get; set; }
+
+
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
 

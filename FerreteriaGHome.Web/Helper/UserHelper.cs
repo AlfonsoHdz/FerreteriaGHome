@@ -115,7 +115,7 @@ namespace FerreteriaGHome.Web.Helper
         public async Task<List<User>> GetAllUsersAsync()
         {
             return await _userManager.Users
-                .OrderBy(u => u.LastName)
+                .OrderBy(u => u.FathersName)
                 .ThenBy(u => u.FirstName)
                 .ToListAsync();
         }

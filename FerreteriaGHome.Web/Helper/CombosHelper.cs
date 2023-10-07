@@ -16,6 +16,41 @@ namespace FerreteriaGHome.Web.Helper
         {
             this.dataContext = dataContext;
         }
+
+        public IEnumerable<SelectListItem> GetComboRoles()
+        {
+            var list = this.dataContext.Roles.Select(b => new SelectListItem
+            {
+                Text = b.Name,
+                Value = $"{b.Id}"
+            }).ToList();
+
+            list.Insert(0, new SelectListItem
+            {
+                Text = "Selecciona un rol",
+                Value = "0"
+            });
+
+            return list;
+        }
+
+        public IEnumerable<SelectListItem> GetComboPriorities()
+        {
+            var list = this.dataContext.Priorities.Select(b => new SelectListItem
+            {
+                Text = b.Description,
+                Value = $"{b.Id}"
+            }).ToList();
+            list.Insert(0, new SelectListItem
+            {
+                Text = "Selecciona la Prioridad",
+                Value = "0"
+            });
+
+            return list;
+        }
+
+
         public IEnumerable<SelectListItem> GetComboBrands()
         {
             var list = this.dataContext.Brands.Select(b => new SelectListItem

@@ -11,20 +11,29 @@ namespace FerreteriaGHome.Web.Data.Entities
     public class User: IdentityUser
     {
         [Required(ErrorMessage = "{0} es obligatorio.")]
-        [MaxLength(100, ErrorMessage = "El campo {0} no puede tener más de {1} caracteres.")]
+        [MaxLength(50, ErrorMessage = "El campo {0} no puede tener más de {1} caracteres.")]
         [Display(Name = "Nombre")]
         public string FirstName { get; set; }
 
         [Required(ErrorMessage = "{0} es obligatorio.")]
-        [MaxLength(100, ErrorMessage = "El campo {0} no puede tener más de {1} caracteres.")]
-        [Display(Name = "Apellidos")]
-        public string LastName { get; set; }
+        [MaxLength(20, ErrorMessage = "El campo {0} no puede tener más de {1} caracteres.")]
+        [Display(Name = "Apellido Paterno")]
+        public string FathersName { get; set; }
 
-        [MaxLength(100, ErrorMessage = "El campo {0} no puede tener más de {1} caracteres.")]
-        [Display(Name = "Telefono")]
-        public override string PhoneNumber { get; set; }
+        [Required(ErrorMessage = "{0} es obligatorio.")]
+        [MaxLength(20, ErrorMessage = "El campo {0} no puede tener más de {1} caracteres.")]
+        [Display(Name = "Apellido Materno")]
+        public string MaternalName { get; set; }
+
+        [Required(ErrorMessage = "{0} es obligatorio.")]
+        [MaxLength(50, ErrorMessage = "El campo {0} no puede tener más de {1} caracteres.")]
+        [Display(Name = "Email")]
+        public override string Email { get; set; }
+
+        [Display(Name = "Rol ")]
+        public IdentityRole Role { get; set; }
 
         [Display(Name = "Nombre")]
-        public string FullName => $"{LastName} {FirstName}";
+        public string FullName => $"{FathersName} {MaternalName} {FirstName}";
     }
 }

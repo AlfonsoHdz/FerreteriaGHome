@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
  <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-success bg-gradient border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-info bg-gradient border-bottom box-shadow mb-3">
             <div class="container p-3">
-                <a class="navbar-brand h2" asp-area="" asp-controller="Home" asp-action="Index">FerreteriaGHome</a>
+                <a class="navbar-brand h2" asp-area="" asp-controller="Home" asp-action="Index">Proyecto de Control</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -22,10 +22,18 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row">
                     <ul class="navbar-nav flex-grow-1">
 
-                        <li class="nav-item">
+                       @* <li class="nav-item">
 
                             <a class="nav-link text-dark" style="font-size:20px" asp-area="" asp-controller="Products" asp-action="Index">Productos</a>
-                        </li>
+                        </li>*@
+                    <li class="nav-item">
+
+                        <a class="nav-link text-dark" style="font-size:20px" asp-area="" asp-controller="Activities" asp-action="Index">Actividades</a>
+                    </li>
+                    <li class="nav-item">
+
+                        <a class="nav-link text-dark" style="font-size:20px" asp-area="" asp-controller="Proyects" asp-action="Index">Proyectos</a>
+                    </li>
                         <li class="nav-item">
                             @if (this.User.IsInRole("Admin") ||  this.User.IsInRole("Client"))
                         {
@@ -159,7 +167,7 @@
 
  <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 FerreteriaGHome <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacidad</a>
+            &copy; 2021 Proyecto de Control <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacidad</a>
         </div>
     </footer>
 

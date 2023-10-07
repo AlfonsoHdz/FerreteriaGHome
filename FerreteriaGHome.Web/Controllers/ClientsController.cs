@@ -51,8 +51,8 @@ namespace FerreteriaGHome.Web.Controllers
                     user = new User
                     {
                         FirstName = model.User.FirstName,
-                        LastName = model.User.LastName,
-                        PhoneNumber = model.User.PhoneNumber,
+                        FathersName = model.User.FathersName,
+                        MaternalName = model.User.MaternalName,
                         Email = model.User.Email,
                         UserName = model.User.Email
                     };
@@ -111,9 +111,10 @@ namespace FerreteriaGHome.Web.Controllers
             {
                 var user = await this._context.Users.FindAsync(model.User.Id);
                 user.FirstName = model.User.FirstName;
-                user.LastName = model.User.LastName;
+                user.FathersName = model.User.FathersName;
+                user.MaternalName = model.User.MaternalName;
                 user.Email = model.User.Email;
-                user.PhoneNumber = model.User.PhoneNumber;
+                
                
                 user.UserName = model.User.Email;
 
