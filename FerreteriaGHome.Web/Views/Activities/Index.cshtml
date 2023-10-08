@@ -21,6 +21,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Priority.Description)
             </th>
+            <th>
+                Evidencia
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Observations)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -36,6 +42,19 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Priority.Description)
                 </td>
+            <td>
+                    @if (item.File != null && item.File.Length > 0)
+                    {
+                        <a href="@Url.Action("DownloadFile", "Activities", new { id = item.Id })">Descargar PDF</a>
+                    }
+                    else
+                    {
+                        <p>Sin evidencia</p>
+                    }
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Observations)
+            </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

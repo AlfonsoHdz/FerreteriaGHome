@@ -21,119 +21,39 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row">
                     <ul class="navbar-nav flex-grow-1">
-
-                       @* <li class="nav-item">
-
-                            <a class="nav-link text-dark" style="font-size:20px" asp-area="" asp-controller="Products" asp-action="Index">Productos</a>
-                        </li>*@
-                    <li class="nav-item">
-
-                        <a class="nav-link text-dark" style="font-size:20px" asp-area="" asp-controller="Activities" asp-action="Index">Actividades</a>
-                    </li>
-                    <li class="nav-item">
-
-                        <a class="nav-link text-dark" style="font-size:20px" asp-area="" asp-controller="Proyects" asp-action="Index">Proyectos</a>
-                    </li>
                         <li class="nav-item">
-                            @if (this.User.IsInRole("Admin") ||  this.User.IsInRole("Client"))
-                        {
-                            <a class="nav-link text-dark" style="font-size:20px" asp-area="" asp-controller="Orders" asp-action="Index">Ordenes</a>
-                        }
-                        
-                        </li>
-                         <li class="nav-item">
-                            @if (this.User.IsInRole("Admin") ||  this.User.IsInRole("Client"))
-                        {
-                            <a class="nav-link text-dark" style="font-size:20px" asp-area="" asp-controller="SaleF" asp-action="Index">Ventas</a>
-                        }
-                        
+                            <a class="nav-link text-dark" style="font-size:20px" asp-area="" asp-controller="Activities" asp-action="Index">Actividades</a>
                         </li>
                         <li class="nav-item">
-                            @if (this.User.IsInRole("Admin"))
-                            {
-                    <a class="nav-link text-dark" style="font-size:20px" asp-area="" asp-controller="Brands" asp-action="Index">Marcas</a>}
+                            <a class="nav-link text-dark" style="font-size:20px" asp-area="" asp-controller="Proyects" asp-action="Index">Proyectos</a>
                         </li>
-
                         <li class="nav-item">
-                             @if (this.User.IsInRole("Admin"))
-                        {
-                            <a class="nav-link text-dark" style="font-size:20px" asp-area="" asp-controller="Providers" asp-action="Index">Provedores</a>
-                        }
-                    </li>
-
-                           <li class="nav-item dropdown bg-success bg-gradient">
-                            @if (this.User.IsInRole("SalesAgent") || this.User.IsInRole("Admin"))
-                            {
-                    <a class="nav-link dropdown-toggle" style="font-size:20px" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuarios</a>}
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-
-                                @if (this.User.IsInRole("SalesAgent") || this.User.IsInRole("Admin"))
-                                {
-                      <a class="nav-link text-dark" style="font-size:20px" asp-area="" asp-controller="Clients" asp-action="Index">Clientes</a>}
-                                <div class="dropdown-divider"></div>
-
-                                 @if (this.User.IsInRole("Admin"))
-                                 {
-                                      <a class="nav-link text-dark" style="font-size:20px"  asp-area="" asp-controller="SaleAgents" asp-action="Index">Agente de Ventas</a>
-                                     
-                                    
-                                 }
-                               
-                            </div>
+                            <a class="nav-link text-dark" style="font-size:20px" asp-area="" asp-controller="Users" asp-action="Index">Usuarios</a>
                         </li>
+                       
+                    
+
+                         
 
                        
 
-                        @*<li class="nav-item dropdown bg-success bg-gradient">
-                            @if (this.User.IsInRole("SalesAgent") || this.User.IsInRole("Admin"))
-                            {
-                    <a class="nav-link dropdown-toggle" style="font-size:20px" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Venta/Compras</a>}
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-
-                                @if (this.User.IsInRole("SalesAgent") || this.User.IsInRole("Admin"))
-                                {
-                    <a class="nav-link text-dark" style="font-size:20px" asp-area="" asp-controller="Sales" asp-action="Index">Ventas</a>}
-                                <div class="dropdown-divider"></div>
-
-                                 @if (this.User.IsInRole("Admin"))
-                                 {
-                                      <a class="nav-link text-dark" style="font-size:20px" asp-area="" asp-controller="Shoppings" asp-action="Index">Compras</a>
-                                 }
-
-
-                               
-                               
-
-                            </div>
-                        </li>*@
-
-                        @*<li class="nav-item dropdown bg-success bg-gradient">
-                            @if (this.User.IsInRole("Admin"))
-                            {
-                    <a class="nav-link dropdown-toggle" style="font-size:20px" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Detalles</a>}
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                                 <a class="nav-link text-dark" style="font-size:20px" asp-area="" asp-controller="SaleDetails" asp-action="Index">Detalle de Venta</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="nav-link text-dark" style="font-size:20px" asp-area="" asp-controller="ShoppingDetails" asp-action="Index">Detalle de Compras</a>
-
-                            </div>
-                        </li>*@
+                    
                     </ul>
+
                     <ul class="nav navbar-nav navbar-right">
                         @if (this.User.Identity.IsAuthenticated)
                         {
-            <li style="font-size:15px; margin: auto;">@this.User.Identity.Name</li>
+                            <li style="font-size:15px; margin: auto;">@this.User.Identity.Name</li>
                             <li>
                                 <a class="nav-link text-dark navbar-right" style="font-size:20px" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
-                            </li> }
-                                        else
-                                        {
+                            </li>
+                        }
+                        else
+                        {
                             <li>
                                 <a class="nav-link text-dark navbar-right" style="font-size:20px" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-                            </li>}
+                            </li>
+                        }
 
                     </ul>
                 </div>
@@ -149,14 +69,9 @@
         </main>
     </div>
 
-        <div class="text-center" class="titulo">
         
-        @*</div>
-        <div>
-            <p class="parrafo1">Donde encuetras de todo, conocce nuestra sucursal con todo preparado para tu hogar desde la variedad de herramientas, herramientas pesadas, utencilios para la cocina y jarceria.</p>
-        </div>
-        <p class="parrafo2">Conoce nuestros nuevos: </p>
-        <div><a href="">Productos</div>*@
+        
+        
 
    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -165,11 +80,11 @@
     @RenderSection("Scripts", required: false)
 </body>
 
- <footer class="border-top footer text-muted">
+<footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2021 Proyecto de Control <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacidad</a>
         </div>
-    </footer>
+</footer>
 
 
 </html>

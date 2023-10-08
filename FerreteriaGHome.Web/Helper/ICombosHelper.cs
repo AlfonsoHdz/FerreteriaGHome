@@ -11,10 +11,6 @@ namespace FerreteriaGHome.Web.Helper
         public IEnumerable<SelectListItem> GetComboRoles();
         public IEnumerable<SelectListItem> GetComboPriorities();
 
-        public IEnumerable<SelectListItem> GetComboBrands();
-        
-        public IEnumerable<SelectListItem> GetComboProducts();
-
-        public IEnumerable<SelectListItem> GetComboItems();
+       
     }
 }

@@ -7,7 +7,7 @@ namespace FerreteriaGHome.Web.Data.Entities
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "{0} es obligatorio")]
-        [MaxLength(15, ErrorMessage = "El campo {0} no puede tener más de {1} caracteres")]
+        [MaxLength(25, ErrorMessage = "El campo {0} no puede tener más de {1} caracteres")]
         [Display(Name = "Nombre de la Carrera")]
         public string Name { get; set; }
 

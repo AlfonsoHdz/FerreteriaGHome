@@ -11,34 +11,6 @@ namespace FerreteriaGHome.Web.Data
 
     public class DataContext: IdentityDbContext<User>
     {
-      
-        public DbSet<Client> Clients { get; set; }
-
-        public DbSet<Brand> Brands { get; set; }
-
-        public DbSet<Product> Products { get; set; }
-
-        public DbSet<Provider> Providers { get; set; }
-        public DbSet<SaleDetail> SaleDetails { get; set; }
-        public DbSet<Sale> Sales { get; set; }
-        public DbSet<SaleAgent> SalesAgents { get; set; }
-
-        public DbSet<Shopping> Shoppings { get; set; }
-        public DbSet<ShoppingDetail> ShoppingDetails { get; set; }
-
-        public DbSet<Admin> Admin { get; set; }
-
-        public DbSet<Order> Orders { get; set; }
-
-        public DbSet<OrderDetail> OrderDetails { get; set; }
-
-        public DbSet<OrderDetailTemp> OrderDetailTemps { get; set; }
-
-        public DbSet<SaleF> SaleFs { get; set; }
-
-        public DbSet<SaleFDetail> SaleFDetails { get; set; }
-
-        public DbSet<SaleFDetailTemp> SaleFDetailTemps { get; set; }
         public DbSet<Proyect> Proyects { get; set; }
         public DbSet<Activity> Activities { get; set; }
         public DbSet<Sprint> Sprints { get; set; }
@@ -47,10 +19,7 @@ namespace FerreteriaGHome.Web.Data
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Student> Students { get; set; }
 
-
-
         public DataContext(DbContextOptions<DataContext> options) : base(options)
-
         {
 
         }

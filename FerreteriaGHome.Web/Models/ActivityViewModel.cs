@@ -12,10 +12,11 @@ namespace FerreteriaGHome.Web.Models
 {
     public class ActivityViewModel: Activity
     {
-       
-
         [Display(Name = "Prioridad")]
         public int PriorityId { get; set; }
+
+        [Display(Name = "Evidencia")]
+        public IFormFile FileId { get; set; }
 
         public IEnumerable<SelectListItem> Priorities { get; set; }
     }

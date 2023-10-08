@@ -10,6 +10,7 @@ using FerreteriaGHome.Web.Data.Entities;
 using FerreteriaGHome.Web.Helper;
 using FerreteriaGHome.Web.Models;
 using Microsoft.AspNetCore.Razor.TagHelpers;
+using System.IO;
 
 namespace FerreteriaGHome.Web.Controllers
 {
@@ -32,6 +33,20 @@ namespace FerreteriaGHome.Web.Controllers
             return View(await _context.Activities
                .Include(p => p.Priority)
                .ToListAsync());
+        }
+
+        public IActionResult DownloadFile(int id)
+        {
+            var activity = _context.Activities.FirstOrDefault(a => a.Id == id);
+
+            if (activity != null && activity.File != null && activity.File.Length > 0)
+            {
+                return File(activity.File, "application/pdf", $"Evidencia {activity.Name}.pdf");
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         // GET: Activities/Details/5
@@ -69,11 +84,22 @@ namespace FerreteriaGHome.Web.Controllers
 
             if (ModelState.IsValid)
             {
+
+                byte[] fileBytes;
+                using (var memoryStream = new MemoryStream())
+                {
+                    await model.FileId.CopyToAsync(memoryStream);
+                    fileBytes = memoryStream.ToArray();
+                    
+                }
+
                 var activity = new Activity
                 {
                     Name = model.Name,
                     Description = model.Description,
                     Priority = await _context.Priorities.FindAsync(model.PriorityId),
+                    Observations = model.Observations,
+                    File = fileBytes
                    
 
                 };

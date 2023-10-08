@@ -51,54 +51,9 @@ namespace FerreteriaGHome.Web.Helper
         }
 
 
-        public IEnumerable<SelectListItem> GetComboBrands()
-        {
-            var list = this.dataContext.Brands.Select(b => new SelectListItem
-            {
-                Text = b.Name,
-                Value = $"{b.Id}"
-            }).ToList();
-            list.Insert(0, new SelectListItem
-            {
-                Text = "Selecciona una marca",
-                Value = "0"
-            });
-
-            return list;
-        }
-
-        public IEnumerable<SelectListItem> GetComboProducts()
-        {
-            var list = this.dataContext.Products.Select(b => new SelectListItem
-            {
-                Text = b.Name,
-                Value = $"{b.Id}"
-            }).ToList();
-            list.Insert(0, new SelectListItem
-            {
-                Text = "Selecciona una producto",
-                Value = "0"
-            });
-
-            return list;
-        }
+      
 
 
-        public IEnumerable<SelectListItem> GetComboItems()
-        {
-            var list = this.dataContext.Products.Select(b => new SelectListItem
-            {
-                Text = b.Name,
-                Value = $"{b.Id}"
-            }).ToList();
-            list.Insert(0, new SelectListItem
-            {
-                Text = "Selecciona un item",
-                Value = "0"
-            });
-
-            return list;
-        }
 
 
     }
