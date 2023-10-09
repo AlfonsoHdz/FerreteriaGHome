@@ -15,13 +15,14 @@ namespace FerreteriaGHome.Web.Controllers
         private readonly DataContext dataContext;
         private readonly IUserHelper userHelper;
         private readonly ICombosHelper combosHelper;
+        private readonly RoleManager<IdentityRole> roleManager;
 
-        public UsersController(DataContext context, IUserHelper userHelper, ICombosHelper combosHelper)
+        public UsersController(DataContext context, IUserHelper userHelper, ICombosHelper combosHelper, RoleManager<IdentityRole> roleManager)
         {
             this.userHelper = userHelper;
             this.combosHelper = combosHelper;
             dataContext = context;
-
+            this.roleManager = roleManager;
         }
 
         public async Task<IActionResult> Index()
@@ -87,6 +88,21 @@ namespace FerreteriaGHome.Web.Controllers
                 cUser.Email = model.Email;
                 cUser.UserName = model.Email;
                 cUser.Role = await this.dataContext.Roles.FindAsync(model.idRole);
+
+                if (!string.IsNullOrEmpty(model.NewPassword))
+                {
+                    var changePasswordRes = await userHelper.ChangePasswordAsync(cUser, model.CurrentPassword, model.NewPassword);
+
+                    if(!changePasswordRes.Succeeded)
+                    {
+                        foreach (var error in changePasswordRes.Errors)
+                        {
+                            ModelState.AddModelError(string.Empty, error.Description);
+                        }
+                        model.roles = this.combosHelper.GetComboRoles();
+                        return View(model);
+                    }
+                }
 
                 var result = await userHelper.UpdateUserAsync(cUser);
     

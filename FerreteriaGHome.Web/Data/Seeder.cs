@@ -10,6 +10,7 @@ namespace FerreteriaGHome.Web.Data
     using System.Linq;
     using FerreteriaGHome.Web.Helper;
     using Microsoft.AspNetCore.Identity;
+    using System.Runtime.ConstrainedExecution;
 
 
     public class Seeder
@@ -17,11 +18,13 @@ namespace FerreteriaGHome.Web.Data
 
         private readonly DataContext dataContext;
         private readonly IUserHelper userHelper;
+        private readonly RoleManager<IdentityRole> roleManager;
 
-        public Seeder(DataContext dataContext, IUserHelper userHelper)
+        public Seeder(DataContext dataContext, IUserHelper userHelper, RoleManager<IdentityRole> roleManager)
         {
             this.dataContext = dataContext;
             this.userHelper = userHelper;
+            this.roleManager = roleManager;
         }
 
         public async Task SeedAsync()
@@ -33,13 +36,15 @@ namespace FerreteriaGHome.Web.Data
 
             if (!this.dataContext.Teachers.Any())
             {
-                var user = await CheckUser("Jesse", "Cerezo", "Honorato", "student@gmail.com", "123456");
+                var role = await roleManager.FindByNameAsync("Teacher");
+                var user = await CheckUser("Jesse", "Cerezo", "Honorato", "student@gmail.com", "123456","Teacher", role);
                 await CheckStudents(user, "Teacher");
             }
 
             if (!this.dataContext.Students.Any())
             {
-                var user = await CheckUser("Yael", "Palace", "Sola", "teacher@gmail.com", "123456");
+                var role = await roleManager.FindByNameAsync("Student");
+                var user = await CheckUser("Yael", "Palace", "Sola", "teacher@gmail.com", "123456","Student",role);
                 await CheckTeachers(user, "Student");
             }
 
@@ -75,7 +80,7 @@ namespace FerreteriaGHome.Web.Data
             await this.dataContext.SaveChangesAsync();
         }
 
-        private async Task<User> CheckUser(string firstName, string fathersName,string maternalName, string email, string password)
+        private async Task<User> CheckUser(string firstName, string fathersName,string maternalName, string email, string password, string roleName, IdentityRole role)
         {
             var user = await userHelper.GetUserByEmailAsync(email);
             if (user == null)
@@ -86,13 +91,15 @@ namespace FerreteriaGHome.Web.Data
                     FathersName = fathersName,
                     MaternalName = maternalName,
                     Email = email,
-                    UserName = email
+                    UserName = email,
+                    Role = role
                 };
                 var result = await userHelper.AddUserAsync(user, password);
                 if (result != IdentityResult.Success)
                 {
                     throw new InvalidOperationException("Error no se pudo crear el usuario");
                 }
+                await userHelper.AddUserToRoleAsync(user, roleName);
             }
             return user;
         }
