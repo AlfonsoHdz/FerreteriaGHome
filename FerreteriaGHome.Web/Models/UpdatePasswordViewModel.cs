@@ -1,18 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FerreteriaGHome.Web.Data.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace FerreteriaGHome.Web.Models
 {
-    public class UpdatePasswordViewModel
+    public class UpdatePasswordViewModel:User
     {
-        [Required(ErrorMessage = "La contraseña actual es requerida.")]
         [DataType(DataType.Password)]
         [Display(Name = "Contraseña actual")]
+        [StringLength(6, ErrorMessage = "La {0} debe tener al menos {2} y como máximo {1} caracteres de longitud.", MinimumLength = 6)]
         public string CurrentPassword { get; set; }
 
-        [Required(ErrorMessage = "La nueva contraseña es requerida.")]
         [DataType(DataType.Password)]
         [Display(Name = "Nueva contraseña")]
-        [StringLength(100, ErrorMessage = "La {0} debe tener al menos {2} y como máximo {1} caracteres de longitud.", MinimumLength = 6)]
+        [StringLength(6, ErrorMessage = "La {0} debe tener al menos {2} y como máximo {1} caracteres de longitud.", MinimumLength = 6)]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
