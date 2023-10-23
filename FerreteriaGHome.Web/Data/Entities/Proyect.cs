@@ -21,7 +21,10 @@ namespace FerreteriaGHome.Web.Data.Entities
         [Display(Name = "Fecha de Creación")]
         public DateTime CreationDate { get; set; }
 
-        public ICollection<Student> Students { get; set; }
+        //public ICollection<Student> Students { get; set; }
         public ICollection<Teacher> Teachers { get; set; }
+
+        public ICollection<ProyectStudent> ProyectStudents { get; set; }
+        public ICollection<ProyectUser> ProyectUsers { get; set; }
     }
 }

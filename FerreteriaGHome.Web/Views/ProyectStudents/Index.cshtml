@@ -1,0 +1,59 @@
+﻿@model IEnumerable<FerreteriaGHome.Web.Data.Entities.User>
+
+@{
+    ViewData["Title"] = "usuarios";
+}
+
+<h1>Registros</h1>
+
+<p>
+    <a asp-action="Create">Crear un nuevo usuario</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FathersName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaternalName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                Rol Asignado
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FathersName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaternalName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

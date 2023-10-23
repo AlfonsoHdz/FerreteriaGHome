@@ -18,14 +18,46 @@ namespace FerreteriaGHome.Web.Data
         public DbSet<Career> Careers { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Student> Students { get; set; }
+        public DbSet<ProyectStudent> ProyectStudents { get; set; }
+        public DbSet<ProyectUser> ProyectUsers { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
 
         }
 
-        //TODO: sobreescribir el metodo onmodelcreating para la eliminacion de cascada
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<ProyectStudent>()
+                .HasKey(ps => new { ps.ProyectId, ps.StudentId });
 
+            modelBuilder.Entity<ProyectStudent>()
+                .HasOne(ps => ps.Proyect)
+                .WithMany(p => p.ProyectStudents)
+                .HasForeignKey(ps => ps.ProyectId);
+
+            modelBuilder.Entity<ProyectStudent>()
+                .HasOne(ps => ps.Student)
+                .WithMany(s => s.ProyectStudents)
+                .HasForeignKey(ps => ps.StudentId);
+
+            //Relación entre Poryect/ProyectUser/User
+
+            modelBuilder.Entity<ProyectUser>()
+                .HasKey(pu => new { pu.ProyectId, pu.UserId });
+
+            modelBuilder.Entity<ProyectUser>()
+                .HasOne(pu => pu.Proyect)
+                .WithMany(p => p.ProyectUsers)
+                .HasForeignKey(pu => pu.ProyectId);
+
+            modelBuilder.Entity<ProyectUser>()
+                .HasOne(pu => pu.User)
+                .WithMany(s => s.ProyectUsers)
+                .HasForeignKey(pu => pu.UserId);
+
+        }
     }
 }

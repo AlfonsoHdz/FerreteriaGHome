@@ -9,8 +9,9 @@
 
     <link rel="stylesheet" href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/site.css" />
 </head>
+<body>
  <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary border border-bottom box-shadow mb-5">
             <div class="container-fluid p-4">
@@ -22,10 +23,13 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" style="font-size:20px" asp-area="" asp-controller="Activities" asp-action="Index">Actividades</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" style="font-size:20px" asp-area="" asp-controller="Proyects" asp-action="Index">Proyectos</a>
+                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" style="font-size:20px" asp-area="" asp-controller="Sprints" asp-action="Index">Sprints</a>
+                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" style="font-size:20px" asp-area="" asp-controller="Activities" asp-action="Index">Actividades</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" style="font-size:20px" asp-area="" asp-controller="Users" asp-action="Index">Usuarios</a>
@@ -60,8 +64,8 @@
             </div>
         </nav>
     </header>
-<body>
-@*    <link rel="stylesheet" type="text/css" href="~/css/portadaestilo.css">*@
+
+@*<link rel="stylesheet" type="text/css" href="~/css/portadaestilo.css">*@
    
     <div class="container">
         <main role="main" class="pb-3">

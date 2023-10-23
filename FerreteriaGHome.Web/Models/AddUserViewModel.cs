@@ -20,5 +20,10 @@ namespace FerreteriaGHome.Web.Models
 
         public IEnumerable<SelectListItem> roles { get; set; }
 
+        
+        //Nuevas propiedades para AddUser del ProyectUsers
+        //public IEnumerable<User> Users { get; set; }    
+        //public List<string> AssociatedUserIds { get; set; }
+
     }
 }

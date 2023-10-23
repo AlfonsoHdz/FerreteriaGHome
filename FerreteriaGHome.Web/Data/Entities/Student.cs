@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace FerreteriaGHome.Web.Data.Entities
 {
@@ -8,6 +9,8 @@ namespace FerreteriaGHome.Web.Data.Entities
         public int Id { get; set; }
         public User User { get; set; }
         public Career Carrer { get; set; }
-        public Proyect Proyect { get; set; }
+        //public Proyect Proyect { get; set; }
+
+        public ICollection<ProyectStudent> ProyectStudents { get; set; }
     }
 }

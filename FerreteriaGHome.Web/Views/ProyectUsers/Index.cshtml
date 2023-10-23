@@ -1,0 +1,52 @@
+﻿@model IEnumerable<FerreteriaGHome.Web.Data.Entities.User>
+
+@{
+    ViewData["Title"] = "usuarios";
+}
+
+<h1>Usuarios en el Proyecto</h1>
+
+<p>
+    <a asp-action="AddUser" asp-route-id="@ViewBag.proyectId">Agregar un nuevo usuario al proyecto </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FathersName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaternalName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FathersName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaternalName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    <a asp-action="RemoveUserFromProyect" asp-route-proyectId="@ViewBag.proyectId" asp-route-userId="@item.Id">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

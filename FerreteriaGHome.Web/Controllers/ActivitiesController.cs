@@ -222,6 +222,7 @@ namespace FerreteriaGHome.Web.Controllers
 
             var model = new UpdateActivityViewModel
             {
+
                 Id = activity.Id,
                 File = activity.File,
                 

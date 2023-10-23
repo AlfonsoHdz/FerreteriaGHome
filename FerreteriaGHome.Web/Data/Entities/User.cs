@@ -35,5 +35,8 @@ namespace FerreteriaGHome.Web.Data.Entities
 
         [Display(Name = "Nombre")]
         public string FullName => $"{FathersName} {MaternalName} {FirstName}";
+
+
+        public ICollection<ProyectUser> ProyectUsers { get; set; }
     }
 }

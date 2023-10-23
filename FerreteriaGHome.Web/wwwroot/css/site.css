@@ -1,18 +1,9 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
-
-
-
-
 .tab {
     border-radius: 25px;
 }
-
-
-
-
-
 
 .title {
     border-radius: 30px;
@@ -31,18 +22,52 @@ for details on configuring this project to bundle and minify static web assets. 
 }
 
 .navbar {
+    margin:15px;
+    background-color: #ecf4fd;
+    border-radius: 30px;
+}
+
+.box-shadow {
+    box-shadow: 3px 0.8rem 0.75rem rgba(0, 0, 0, .05) !important;
+}
+
+.container {
+    width: 100%;
+    background-color: #f9f9fb;
+    border: 1px solid #e8e8e8;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 2px 0.5rem 0.75rem rgba(0, 0, 0, .05) !important;
+}
+
+.table th, .table td {
+    border-top: none !important;
+}
+
+.border-info {
+    border-color: #17a2b8 !important;
+    background-color: #f3f4f8;
+}
+
+.act-proy{
+    color:#ffff !important;
+}
+
+.containercontrol {
+    background-color: #f3f4f8;
 }
 
 a.navbar-brand {
     white-space: normal;
     text-align: center;
     word-break: break-all;
-    
 }
+
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #679fed;
+    text-decoration: none !important;
 }
 
 .btn-primary {
@@ -60,7 +85,7 @@ a {
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 @media (min-width: 768px) {
   html {

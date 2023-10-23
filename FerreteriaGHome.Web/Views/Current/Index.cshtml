@@ -1,0 +1,52 @@
+﻿@*@model IEnumerable<FerreteriaGHome.Web.Data.Entities.Activity>*@
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>@ViewBag.proyectName</h1>
+<h2>@ViewBag.proyectId</h2>
+
+<div class="d-flex flex-row mb-3 mt-4">
+    <div class="p-2">
+        <div class="card" style="width: 18rem;">
+            <img src="~/images/ControlImgs/notebook-1198156_1280.jpg" class="card-img-top rounded-4" alt="...">
+            <div class="card-body">
+                <a href="#" class="btn btn-primary act-proy">Gestionar Tablero</a>
+            </div>
+        </div>
+    </div>
+    <div class="p-2">
+        <div class="card" style="width: 18rem;">
+            <img src="~/images/ControlImgs/people-2557396_1280.jpg" class="card-img-top rounded-4" alt="...">
+            <div class="card-body">
+                <a asp-controller="ProyectUsers" asp-action="Index" asp-route-id="@ViewBag.proyectId" class="btn btn-primary act-proy">Gestionar Usuarios</a>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<h2>Sprint Actual</h2>
+<p>
+    Fecha de Inicio: 14/10/2023<br />
+    Fecha de Finalización: 20/10/2023
+</p>
+
+<div id="sprint-container" class="d-flex flex-row mb-3 border border-2" style="height:250px;">
+    <!-- Esta es la zona de destino para soltar la actividad -->
+</div>
+
+<h2>Actividades</h2>
+
+<div class="d-flex flex-row mb-3 border border-2">
+    <p id="actividad-1" class="draggable-activity">
+        Actividad 1.0
+    </p>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/js/dragAndDrop.js"></script>
+
+
+

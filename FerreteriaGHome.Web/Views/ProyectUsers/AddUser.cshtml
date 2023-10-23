@@ -1,0 +1,68 @@
+﻿@model IEnumerable<FerreteriaGHome.Web.Data.Entities.User>
+@{
+    ViewData["Title"] = "usuarios";
+}
+
+<h1>Listado de Usuarios</h1>
+
+<form asp-action="AddUser" method="post">
+    <input type="hidden" name="proyectId" value="@ViewBag.proyectId"/>
+    @*<h2>Poryecto ID: @ViewBag.proyectId</h2>*@
+
+    <div class="form-group">
+        <input type="submit" value="Agregar Usuarios" class="btn btn-primary" />
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FathersName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MaternalName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    Rol Asignado
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <input class="form-check-input" name="selectedUsersIds" type="checkbox" value="@item.Id">
+                       
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FathersName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaternalName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        Estudiante
+                        @*@Html.DisplayFor(modelItem => item.Role.Name)*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>
+
