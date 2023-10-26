@@ -20,6 +20,7 @@ namespace FerreteriaGHome.Web.Data
         public DbSet<Student> Students { get; set; }
         public DbSet<ProyectStudent> ProyectStudents { get; set; }
         public DbSet<ProyectUser> ProyectUsers { get; set; }
+        public DbSet<ProyectActivity> ProyectActivities { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
@@ -43,7 +44,7 @@ namespace FerreteriaGHome.Web.Data
                 .WithMany(s => s.ProyectStudents)
                 .HasForeignKey(ps => ps.StudentId);
 
-            //Relación entre Poryect/ProyectUser/User
+            //Clase intermedia Poryect/ProyectUser/User
 
             modelBuilder.Entity<ProyectUser>()
                 .HasKey(pu => new { pu.ProyectId, pu.UserId });
@@ -57,6 +58,21 @@ namespace FerreteriaGHome.Web.Data
                 .HasOne(pu => pu.User)
                 .WithMany(s => s.ProyectUsers)
                 .HasForeignKey(pu => pu.UserId);
+
+            //Clase intermedia Poryect/ProyectActivity/Activity
+
+            modelBuilder.Entity<ProyectActivity>()
+                .HasKey(pa => new {pa.ProyectId, pa.ActivityId});
+
+            modelBuilder.Entity<ProyectActivity>()
+                .HasOne(pa => pa.Proyect)
+                .WithMany(p => p.ProyectActivities)
+                .HasForeignKey(pa => pa.ProyectId);
+
+            modelBuilder.Entity<ProyectActivity>()
+                .HasOne(pa => pa.Activity)
+                .WithMany(s => s.ProyectActivities)
+                .HasForeignKey(pa => pa.ActivityId);
 
         }
     }

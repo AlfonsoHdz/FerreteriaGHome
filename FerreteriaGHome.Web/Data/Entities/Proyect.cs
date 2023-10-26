@@ -26,5 +26,6 @@ namespace FerreteriaGHome.Web.Data.Entities
 
         public ICollection<ProyectStudent> ProyectStudents { get; set; }
         public ICollection<ProyectUser> ProyectUsers { get; set; }
+        public ICollection<ProyectActivity> ProyectActivities { get; set;}
     }
 }

@@ -24,7 +24,7 @@ for details on configuring this project to bundle and minify static web assets. 
 .navbar {
     margin:15px;
     background-color: #ecf4fd;
-    border-radius: 30px;
+    border-radius: 20px;
 }
 
 .box-shadow {
@@ -34,11 +34,41 @@ for details on configuring this project to bundle and minify static web assets. 
 .container {
     width: 100%;
     background-color: #f9f9fb;
-    border: 1px solid #e8e8e8;
-    border-radius: 15px;
+    /*border: 1px solid #e8e8e8;*/
+    border-radius: 12px;
     padding: 20px;
-    box-shadow: 2px 0.5rem 0.75rem rgba(0, 0, 0, .05) !important;
+    /*box-shadow: 2px 0.5rem 0.75rem rgba(0, 0, 0, .05) !important;*/
 }
+
+.title-current{
+    margin: 30px 0px 30px 0px;
+}
+
+/*Estilo de las cards del proyecto*/
+.manag-container {
+    /*background-color:antiquewhite;*/
+    max-width: 670px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.manag-container-1 {
+    max-width: 300px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 1px 0.5rem 0.75rem rgba(0, 0, 0, .05) !important;
+}
+
+.card-img-top {
+    border-radius:5px;
+}
+
+.card-body {
+    text-align: center;
+}
+
+
 
 .table th, .table td {
     border-top: none !important;
@@ -63,6 +93,9 @@ a.navbar-brand {
     word-break: break-all;
 }
 
+.border {
+    border: 0.4px solid #dee2e6 !important;
+}
 
 /* Provide sufficient contrast against white background */
 a {

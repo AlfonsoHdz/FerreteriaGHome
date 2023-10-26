@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace FerreteriaGHome.Web.Data.Entities
 {
@@ -26,5 +27,8 @@ namespace FerreteriaGHome.Web.Data.Entities
         [MaxLength(40, ErrorMessage = "El campo {0} no puede tener más de {1} caracteres")]
         [Display(Name = "Observaciones")]
         public string Observations { get; set; }
+
+        public ICollection<ProyectActivity> ProyectActivities { get; set; }
+
     }
 }
