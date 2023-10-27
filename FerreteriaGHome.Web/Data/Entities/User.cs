@@ -38,5 +38,7 @@ namespace FerreteriaGHome.Web.Data.Entities
 
 
         public ICollection<ProyectUser> ProyectUsers { get; set; }
+        public ICollection<ActivityUser> ActivityUsers { get; set; }
+
     }
 }

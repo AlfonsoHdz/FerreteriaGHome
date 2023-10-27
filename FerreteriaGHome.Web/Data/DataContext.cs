@@ -21,6 +21,7 @@ namespace FerreteriaGHome.Web.Data
         public DbSet<ProyectStudent> ProyectStudents { get; set; }
         public DbSet<ProyectUser> ProyectUsers { get; set; }
         public DbSet<ProyectActivity> ProyectActivities { get; set; }
+        public DbSet<ActivityUser> ActivityUsers { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
@@ -73,6 +74,21 @@ namespace FerreteriaGHome.Web.Data
                 .HasOne(pa => pa.Activity)
                 .WithMany(s => s.ProyectActivities)
                 .HasForeignKey(pa => pa.ActivityId);
+
+            //Clase intermedia Activity/ActivityUser/User
+
+            modelBuilder.Entity<ActivityUser>()
+                .HasKey(au => new { au.ActivityId, au.UserId });
+
+            modelBuilder.Entity<ActivityUser>()
+                .HasOne(au => au.Activity)
+                .WithMany(s => s.ActivityUsers)
+                .HasForeignKey(au => au.ActivityId);
+
+            modelBuilder.Entity<ActivityUser>()
+                .HasOne(au => au.User)
+                .WithMany(s => s.ActivityUsers)
+                .HasForeignKey(au => au.UserId);
 
         }
     }

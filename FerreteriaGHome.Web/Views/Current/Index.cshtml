@@ -102,9 +102,9 @@
                     @Html.DisplayFor(modelItem => item.Observations)
                 </td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@item.Id">Gestionar Asignación</a> -
-                    <a asp-action="EditActivity" asp-route-id="@item.Id" asp-route-proyectId="@ViewBag.proyectId">Edit</a> 
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-controller="ActivityUsers" asp-action="Index" asp-route-id="@item.Id" asp-route-proyectId="@ViewBag.proyectId">Gestionar Asignación</a> -
+                    <a asp-action="EditActivity" asp-route-id="@item.Id" asp-route-proyectId="@ViewBag.proyectId">Edit</a>
+                    <a asp-action="DeleteActivity" asp-route-id="@item.Id" asp-route-proyectId="@ViewBag.proyectId">Delete</a>
                 </td>
             </tr>
         }

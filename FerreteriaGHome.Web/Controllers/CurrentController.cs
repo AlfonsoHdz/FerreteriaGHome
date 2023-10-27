@@ -222,6 +222,41 @@ namespace FerreteriaGHome.Web.Controllers
             return View(model);
         }
 
+        
+        public async Task<IActionResult> DeleteActivity(int id, int? proyectId)
+        {
+            var activity = await _context.Activities.FindAsync(id);
+
+            if(activity == null)
+            {
+                return NotFound();
+            }
+
+            var proyectActivity = await _context.ProyectActivities
+                .Where(pa => pa.ProyectId == proyectId && pa.ActivityId == id)
+                .FirstOrDefaultAsync();
+
+            if(proyectActivity != null)
+            {
+                //Eliminar del proyecto
+                _context.ProyectActivities.Remove(proyectActivity);
+            }
+
+            //Eliminar Actividad
+            _context.Activities.Remove(activity);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index", new { id = proyectId });
+
+        }
+
+        //[HttpGet]
+        //public async Task<IActionResult> UsersActivity(int? id, int? proyectId)
+        //{
+
+        //}
+
+
         [HttpGet]
         public async Task<IActionResult> ProyectDetail(int? id)
         {
@@ -245,30 +280,7 @@ namespace FerreteriaGHome.Web.Controllers
         }
 
 
-        //[HttpGet]
-        //public async Task<IActionResult> ProyActIndex(int? id)
-        //{
-            //if (id == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //var proyect = await _context.Proyects.FirstOrDefaultAsync(p => p.Id == id);
-
-            //if (proyect == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //var activitiesInProyect = await _context.ProyectActivities
-            //    .Where(ps => ps.ProyectId == id)
-            //    .Select(ps => ps.Activity)
-            //    .ToListAsync();
-
-            //return View(activitiesInProyect);
-
-            
-        //}
+       
 
         
     }
