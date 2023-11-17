@@ -77,25 +77,15 @@ namespace FerreteriaGHome.Web.Controllers
             var proyectId = proyect.Id;
             ViewBag.proyectId = proyectId;
 
-            //Mostrar check de usuarios que ya esten asociados
-            //var proyectUsers = await dataContext.ProyectUsers
-            //    .Where(pu => pu.ProyectId == id)
-            //    .Select(pu => pu.UserId)
-            //    .ToListAsync();
+            var usersNotInActivity = dataContext.Users
+               .Where(u => !dataContext.ProyectUsers.Any(au => au.ProyectId == id && au.UserId == u.Id))
+               .Where(u => u.Role.Name == "Student")
+               .ToList();
 
-            //var users = await dataContext.Users.Include(u => u.Role).ToListAsync();
-
-            //return View(new AddUserViewModel
-            //{
-            //    Users = users,
-            //    AssociatedUserIds = proyectUsers
-            //});
-
-
-            //return View(await dataContext.Users.Include(u => u.Role).ToListAsync());
-            return View(await dataContext.Users
-                .Where(u => u.Role.Name == "Student")
-                .ToListAsync());
+            return View(usersNotInActivity);
+            //return View(await dataContext.Users
+            //    .Where(u => u.Role.Name == "Student")
+            //    .ToListAsync());
         }
 
         [HttpPost]

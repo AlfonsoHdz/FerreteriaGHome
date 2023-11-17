@@ -1,5 +1,6 @@
 ﻿@*@model IEnumerable<FerreteriaGHome.Web.Data.Entities.Activity>*@
-@model IEnumerable<FerreteriaGHome.Web.Data.Entities.Activity>
+@*@model IEnumerable<FerreteriaGHome.Web.Data.Entities.Activity>*@
+@model FerreteriaGHome.Web.Models.ProyectViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -9,14 +10,14 @@
 @*<h2>@ViewBag.proyectId</h2>*@
 
 <div class="manag-container">
-    <div class="manag-container-1">
+    @*<div class="manag-container-1">
         <div class="card-headed">
             <img src="~/images/ControlImgs/notebook-1198156_1280.jpg" class="card-img-top" alt="...">
         </div>
         <div class="card-body">
             <a href="#" class="button-custom">Gestionar Tablero</a>
         </div>
-    </div>
+    </div>*@
     <div class="manag-container-1">
         <div class="card-headed">
             <img src="~/images/ControlImgs/people-2557396_1280.jpg" class="card-img-top" alt="...">
@@ -27,29 +28,6 @@
     </div>
 </div>
 
-
-
-@*<div class="d-flex flex-row mb-3 mt-4">
-    <div class="p-2">
-        <div class="card" style="width: 18rem;">
-            <img src="~/images/ControlImgs/notebook-1198156_1280.jpg" class="card-img-top rounded-4" alt="...">
-            <div class="card-body">
-                <a href="#" class="btn btn-primary act-proy">Gestionar Tablero</a>
-            </div>
-        </div>
-    </div>
-    <div class="p-2">
-        <div class="card" style="width: 18rem;">
-            <img src="~/images/ControlImgs/people-2557396_1280.jpg" class="card-img-top rounded-4" alt="...">
-            <div class="card-body">
-                <a asp-controller="ProyectUsers" asp-action="Index" asp-route-id="@ViewBag.proyectId" class="btn btn-primary act-proy">Gestionar Usuarios</a>
-            </div>
-        </div>
-    </div>
-    
-</div>*@
-
-
 <h2 class="title-current">Actividades</h2>
 <p>
     <a asp-action="CreateActivity" asp-route-id="@ViewBag.proyectId">Crear una nueva actividad</a>
@@ -58,10 +36,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Nombre
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                Descripción
             </th>
             <th>
                 Prioridad
@@ -70,13 +48,13 @@
                 Evidencia
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Observations)
+                Observaciones
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Activities)
         {
             <tr>
                 <td>
@@ -111,17 +89,56 @@
     </tbody>
 </table>
 
-<h2 class="title-current">Sprint Actual</h2>
+
+
+
+<h2 class="title-current">Sprints</h2>
 <p>
-    Fecha de Inicio: 14/10/2023<br />
-    Fecha de Finalización: 20/10/2023
+    <a asp-action="CreateSprint" asp-route-id="@ViewBag.proyectId">Crear una nuevo Sprint</a>
 </p>
-
-
-<div id="sprint-container" class="d-flex flex-row mb-3 border border-2" style="height:250px;">
-    <!-- Esta es la zona de destino para soltar la actividad -->
-</div>
-
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Objetivo
+            </th>
+            <th>
+                Fecha de Inicio
+            </th>
+            <th>
+                Fecha de finalización
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Sprints)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Objective)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    <a asp-controller="SprintActivities" asp-action="Index" asp-route-id="@item.Id" asp-route-proyectId="@ViewBag.proyectId">Gestionar Actividades</a> -
+                    <a asp-action="EditSprint" asp-route-id="@item.Id" asp-route-proyectId="@ViewBag.proyectId">Edit</a>
+                    <a asp-action="DeleteSprint" asp-route-id="@item.Id" asp-route-proyectId="@ViewBag.proyectId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
 
 <link rel="stylesheet" type="text/css" href="~/css/site.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

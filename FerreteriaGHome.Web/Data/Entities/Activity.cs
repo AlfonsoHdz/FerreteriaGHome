@@ -30,6 +30,7 @@ namespace FerreteriaGHome.Web.Data.Entities
 
         public ICollection<ProyectActivity> ProyectActivities { get; set; }
         public ICollection<ActivityUser> ActivityUsers { get; set; }
+        public ICollection<SprintActivity> SprintActivities { get; set; }
 
     }
 }

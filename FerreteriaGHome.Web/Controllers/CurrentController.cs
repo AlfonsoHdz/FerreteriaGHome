@@ -66,8 +66,176 @@ namespace FerreteriaGHome.Web.Controllers
                 File = item.Activity.File
             });
 
-            return View(activitiesViewModel);
+            var sprintsInProyect = await _context.ProyectSprints
+            .Where(s => s.ProyectId == id)
+            .Select(s => new
+            {
+                Sprint = s.Sprint,
+            })
+            .ToListAsync();
+
+            var sprintsViewModel = sprintsInProyect.Select(item => new SprintViewModel
+            {
+                Id = item.Sprint.Id,
+                Name = item.Sprint.Name,
+                Objective = item.Sprint.Objective,
+                StartDate = item.Sprint.StartDate,
+                EndDate = item.Sprint.EndDate
+            });
+
+            
+            var proyectViewModel = new ProyectViewModel
+            {
+                Activities = activitiesViewModel,
+                Sprints = sprintsViewModel
+            };
+
+            return View(proyectViewModel);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> CreateSprint(int? id)
+        {
+            var proyect = await _context.Proyects.FirstOrDefaultAsync(p => p.Id == id);
+
+            if (proyect == null)
+            {
+                return NotFound();
+            }
+
+            var proyectId = proyect.Id;
+            ViewBag.proyectId = proyectId;
+
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateSprint(SprintViewModel model, int proyectId)
+        {
+            if(ModelState.IsValid)
+            {
+                var sprint = new SprintViewModel
+                {
+                    Name = model.Name,
+                    Objective = model.Objective,
+                    StartDate = model.StartDate,
+                    EndDate = model.EndDate
+                    
+
+                };
+
+                _context.Add(sprint);
+                await _context.SaveChangesAsync();
+
+                var proyectSprint = new ProyectSprint
+                {
+                    ProyectId = proyectId,
+                    SprintId = sprint.Id
+                };
+
+                _context.ProyectSprints.Add(proyectSprint);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Index", new { id = proyectId });
+            }
+            return View(model);
+        }
+
+        public async Task<IActionResult> DeleteSprint(int id, int? proyectId)
+        {
+            var sprint = await _context.Sprints.FindAsync(id);
+
+            if (sprint == null)
+            {
+                return NotFound();
+            }
+
+            var proyectSprint = await _context.ProyectSprints
+                .Where(pa => pa.ProyectId == proyectId && pa.SprintId == id)
+                .FirstOrDefaultAsync();
+
+            if (proyectSprint != null)
+            {
+                //Eliminar del proyecto
+                _context.ProyectSprints.Remove(proyectSprint);
+            }
+
+            //Eliminar Actividad
+            _context.Sprints.Remove(sprint);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index", new { id = proyectId });
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditSprint(int? id, int? proyectId)
+        {
+            if (id == null && proyectId == null)
+            {
+                return NotFound();
+            }
+
+            var proyect = await _context.Proyects.FirstOrDefaultAsync(p => p.Id == proyectId);
+
+            if (proyect == null)
+            {
+                return NotFound();
+            }
+
+            var proyect2 = proyect.Id;
+            ViewBag.proyectId = proyect2;
+
+
+            var sprint = await _context.Sprints
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+
+            if (sprint == null)
+            {
+                return NotFound();
+            }
+
+            var model = new SprintViewModel
+            {
+                Name = sprint.Name,
+                Objective = sprint.Objective,
+                StartDate = sprint.StartDate,
+                EndDate = sprint.EndDate,
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditSprint(SprintViewModel model, int? proyectId)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var sprint = new Data.Entities.Sprint
+                {
+                    Id = model.Id,
+                    Name = model.Name,
+                    Objective = model.Objective,
+                    StartDate = model.StartDate,
+                    EndDate = model.EndDate
+
+                };
+
+                _context.Update(sprint);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Index", new { id = proyectId });
+            }
+
+            return View(model);
+        }
+
+
+
 
         [HttpGet]
         public async Task<IActionResult> CreateActivity(int? id)
@@ -249,12 +417,6 @@ namespace FerreteriaGHome.Web.Controllers
             return RedirectToAction("Index", new { id = proyectId });
 
         }
-
-        //[HttpGet]
-        //public async Task<IActionResult> UsersActivity(int? id, int? proyectId)
-        //{
-
-        //}
 
 
         [HttpGet]

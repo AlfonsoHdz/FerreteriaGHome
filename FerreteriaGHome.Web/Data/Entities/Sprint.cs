@@ -31,6 +31,8 @@ namespace FerreteriaGHome.Web.Data.Entities
         public DateTime EndDate { get; set; }
 
         public ICollection<Activity> Activities { get; set; }
+        public ICollection<ProyectSprint> ProyectSprints { get; set; }
+        public ICollection<SprintActivity> SprintActivities { get; set; }
 
         public static ValidationResult StartDateValidation(DateTime startDate, ValidationContext context)
         {

@@ -22,6 +22,9 @@ namespace FerreteriaGHome.Web.Data
         public DbSet<ProyectUser> ProyectUsers { get; set; }
         public DbSet<ProyectActivity> ProyectActivities { get; set; }
         public DbSet<ActivityUser> ActivityUsers { get; set; }
+        public DbSet<ProyectSprint> ProyectSprints { get; set; }
+        public DbSet<SprintActivity> SprintActivities { get; set; }
+
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
@@ -89,6 +92,36 @@ namespace FerreteriaGHome.Web.Data
                 .HasOne(au => au.User)
                 .WithMany(s => s.ActivityUsers)
                 .HasForeignKey(au => au.UserId);
+
+            //Clase intermedia Proyect/ProyectSprint/Sprint
+
+            modelBuilder.Entity<ProyectSprint>()
+                .HasKey(ps => new { ps.ProyectId, ps.SprintId });
+
+            modelBuilder.Entity<ProyectSprint>()
+                .HasOne(ps => ps.Proyect)
+                .WithMany(s => s.ProyectSprints)
+                .HasForeignKey(ps => ps.ProyectId);
+
+            modelBuilder.Entity<ProyectSprint>()
+                .HasOne(ps => ps.Sprint)
+                .WithMany(s => s.ProyectSprints)
+                .HasForeignKey(ps => ps.SprintId);
+
+            //Clase intermedia Sprint/SprintActivity/Activity
+
+            modelBuilder.Entity<SprintActivity>()
+                .HasKey(sa => new { sa.SprintId, sa.ActivityId });
+
+            modelBuilder.Entity<SprintActivity>()
+                .HasOne(sa => sa.Sprint)
+                .WithMany(s => s.SprintActivities)
+                .HasForeignKey(sa => sa.SprintId);
+
+            modelBuilder.Entity<SprintActivity>()
+                .HasOne(sa => sa.Activity)
+                .WithMany(s => s.SprintActivities)
+                .HasForeignKey(sa => sa.ActivityId);
 
         }
     }

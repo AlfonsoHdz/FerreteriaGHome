@@ -69,8 +69,9 @@ namespace FerreteriaGHome.Web.Controllers
             ViewBag.activityId = activity.Id;
 
             var usersNotInActivity = _context.Users
+                .Where(u => u.Role.Name == "Student")
                 .Where(u => !_context.ActivityUsers.Any(au => au.ActivityId == Id && au.UserId == u.Id))
-                .Where(u => u.Role.Name == "Student")   
+                .Where(u => _context.ProyectUsers.Any(pu => pu.ProyectId == proyectId && pu.UserId == u.Id))
                 .ToList();
 
             return View(usersNotInActivity);
