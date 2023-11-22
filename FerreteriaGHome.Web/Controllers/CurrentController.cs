@@ -52,7 +52,8 @@ namespace FerreteriaGHome.Web.Controllers
                 .Select(ps => new
                 {
                     Activity = ps.Activity,
-                    Priority = ps.Activity.Priority
+                    Priority = ps.Activity.Priority,
+                    Status = ps.Activity.Status
                 })
                 .ToListAsync();
 
@@ -63,7 +64,8 @@ namespace FerreteriaGHome.Web.Controllers
                 Description = item.Activity.Description,
                 Priority = item.Priority,
                 Observations = item.Activity.Observations,
-                File = item.Activity.File
+                File = item.Activity.File,
+                Status = item.Status
             });
 
             var sprintsInProyect = await _context.ProyectSprints
@@ -115,6 +117,22 @@ namespace FerreteriaGHome.Web.Controllers
         {
             if(ModelState.IsValid)
             {
+                var existingSprint = await _context.Sprints
+                    .FirstOrDefaultAsync(s =>
+                    (model.StartDate >= s.StartDate && model.StartDate <= s.EndDate) ||
+                    (model.EndDate >= s.StartDate && model.EndDate <= s.EndDate) ||
+                    (s.StartDate >= model.StartDate && s.StartDate <= model.EndDate) ||
+                    (s.EndDate >= model.StartDate && s.EndDate <= model.EndDate)
+                    );
+
+                if(existingSprint != null)
+                {
+                    ModelState.AddModelError(string.Empty, "Las fechas seleccionadas coinciden con otro Sprint existente.");
+                    ModelState.AddModelError(string.Empty, "Por favor seleccione un rango diferente");
+                    return View(model);
+                }
+
+
                 var sprint = new SprintViewModel
                 {
                     Name = model.Name,
@@ -242,7 +260,9 @@ namespace FerreteriaGHome.Web.Controllers
         {
             var model = new ActivityViewModel
             {
-                Priorities = combosHelper.GetComboPriorities()
+                Priorities = combosHelper.GetComboPriorities(),
+                Statuses = combosHelper.GetComboStatuses(),
+                StatusId = 1
             };
 
             var proyect = await _context.Proyects.FirstOrDefaultAsync(p => p.Id == id);
@@ -284,7 +304,8 @@ namespace FerreteriaGHome.Web.Controllers
                     Description = model.Description,
                     Priority = await _context.Priorities.FindAsync(model.PriorityId),
                     Observations = model.Observations,
-                    File = fileBytes
+                    File = fileBytes,
+                    Status = await _context.Statuses.FindAsync(model.StatusId),
 
                 };
 

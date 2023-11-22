@@ -1,0 +1,61 @@
+﻿@model FerreteriaGHome.Web.Models.UpdateActivityViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<a class="material-back" asp-controller="CurrentSprint" asp-action="Index" asp-route-id="@ViewBag.proyectId">
+    <span class="material-symbols-outlined">
+        arrow_back
+    </span>
+</a>
+<h3 class="title-current title-menu">Edición</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditStateFromActivity" enctype="multipart/form-data">
+            <input name="proyectId" type="hidden" value="@ViewBag.proyectId" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group d-none">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group d-none">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group d-none">
+                <label asp-for="PriorityId" class="control-label"></label>
+                <select asp-for="PriorityId" class="form-control" asp-items="Model.Priorities"></select>
+                <span asp-validation-for="Priority" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Observations" class="control-label"></label>
+                <input asp-for="Observations" class="form-control" />
+                <span asp-validation-for="Observations" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="File" class="control-label"></label>
+                <input asp-for="FileId" class="form-control" type="file" accept=".pdf" />
+                <span asp-validation-for="FileId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StateId" class="control-label"></label>
+                <select asp-for="StateId" class="form-control" asp-items="Model.Statuses"></select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

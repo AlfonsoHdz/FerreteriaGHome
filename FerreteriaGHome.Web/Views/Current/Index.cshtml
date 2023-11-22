@@ -6,32 +6,48 @@
     ViewData["Title"] = "Index";
 }
 
+<a class="material-back" asp-controller="Proyects" asp-action="Index">
+    <span class="material-symbols-outlined">
+        arrow_back
+    </span>
+</a>
+
 <h1 class="title-current">@ViewBag.proyectName</h1>
 @*<h2>@ViewBag.proyectId</h2>*@
 
 <div class="manag-container">
-    @*<div class="manag-container-1">
+    <a class="manag-container-1" asp-controller="ProyectUsers" asp-action="Index" asp-route-id="@ViewBag.proyectId" class="button-custom">
         <div class="card-headed">
-            <img src="~/images/ControlImgs/notebook-1198156_1280.jpg" class="card-img-top" alt="...">
+            <img src="~/images/ControlImgs/users.png" class="card-img-top" alt="...">
         </div>
         <div class="card-body">
-            <a href="#" class="button-custom">Gestionar Tablero</a>
+            @*<a asp-controller="ProyectUsers" asp-action="Index" asp-route-id="@ViewBag.proyectId" class="button-custom">Gestionar Usuarios</a>*@
+            Gestionar Usuarios
         </div>
-    </div>*@
-    <div class="manag-container-1">
+    </a>
+    <a class="manag-container-1" asp-controller="CurrentSprint" asp-action="Index" asp-route-id="@ViewBag.proyectId" class="button-custom">
         <div class="card-headed">
-            <img src="~/images/ControlImgs/people-2557396_1280.jpg" class="card-img-top" alt="...">
+            <img src="~/images/ControlImgs/task.png" class="card-img-top" alt="...">
         </div>
         <div class="card-body">
-            <a asp-controller="ProyectUsers" asp-action="Index" asp-route-id="@ViewBag.proyectId" class="button-custom">Gestionar Usuarios</a>
+            @*<a asp-controller="CurrentSprint" asp-action="Index" asp-route-id="@ViewBag.proyectId" class="button-custom">Gestionar Sprint Actual</a>*@
+            Gestionar Sprint Actual
         </div>
-    </div>
+    </a>
 </div>
 
-<h2 class="title-current">Actividades</h2>
-<p>
-    <a asp-action="CreateActivity" asp-route-id="@ViewBag.proyectId">Crear una nueva actividad</a>
+<h2 class="title-current title-menu">Actividades</h2>
+<p class="button-container">
+    <a asp-action="CreateActivity" class="material-button" asp-route-id="@ViewBag.proyectId">
+        <span class="material-symbols-outlined">
+            add
+        </span>
+        Nueva actividad
+    </a>
 </p>
+@*<p>
+    <a asp-action="CreateActivity" asp-route-id="@ViewBag.proyectId">Crear una nueva actividad</a>
+</p>*@
 <table class="table">
     <thead>
         <tr>
@@ -49,6 +65,9 @@
             </th>
             <th>
                 Observaciones
+            </th>
+            <th>
+                Estado
             </th>
             <th></th>
         </tr>
@@ -80,9 +99,29 @@
                     @Html.DisplayFor(modelItem => item.Observations)
                 </td>
                 <td>
-                    <a asp-controller="ActivityUsers" asp-action="Index" asp-route-id="@item.Id" asp-route-proyectId="@ViewBag.proyectId">Gestionar Asignación</a> -
-                    <a asp-action="EditActivity" asp-route-id="@item.Id" asp-route-proyectId="@ViewBag.proyectId">Edit</a>
-                    <a asp-action="DeleteActivity" asp-route-id="@item.Id" asp-route-proyectId="@ViewBag.proyectId">Delete</a>
+                    @Html.DisplayFor(modelItem => item.Status.Description)
+                </td>
+                <td>
+                    <a class="material-button__main" asp-controller="ActivityUsers" asp-action="Index" asp-route-id="@item.Id" asp-route-proyectId="@ViewBag.proyectId">
+                        Gestionar Asignación
+                    </a>
+                    <a class="material-button__secondary" asp-action="EditActivity" asp-route-id="@item.Id" asp-route-proyectId="@ViewBag.proyectId">
+                        <span class="material-symbols-outlined">
+                            <span class="material-symbols-outlined">
+                                edit_note
+                            </span>
+                        </span>
+                    </a>
+                    <a class="material-button__secondary" asp-action="DeleteActivity" asp-route-id="@item.Id" asp-route-proyectId="@ViewBag.proyectId">
+                        <span class="material-symbols-outlined">
+                            <span class="material-symbols-outlined">
+                                delete
+                            </span>
+                        </span>
+                    </a>
+                    @*<a asp-controller="ActivityUsers" asp-action="Index" asp-route-id="@item.Id" asp-route-proyectId="@ViewBag.proyectId">Gestionar Asignación</a>*@ 
+                    @*<a asp-action="EditActivity" asp-route-id="@item.Id" asp-route-proyectId="@ViewBag.proyectId">Editar</a>*@
+                    @*<a asp-action="DeleteActivity" asp-route-id="@item.Id" asp-route-proyectId="@ViewBag.proyectId">Eliminar</a>*@
                 </td>
             </tr>
         }
@@ -92,9 +131,17 @@
 
 
 
-<h2 class="title-current">Sprints</h2>
-<p>
+<h2 class="title-current title-menu">Sprints</h2>
+@*<p>
     <a asp-action="CreateSprint" asp-route-id="@ViewBag.proyectId">Crear una nuevo Sprint</a>
+</p>*@
+<p class="button-container">
+    <a asp-action="CreateSprint" class="material-button" asp-route-id="@ViewBag.proyectId">
+        <span class="material-symbols-outlined">
+            add
+        </span>
+        Nuevo Sprint
+    </a>
 </p>
 <table class="table">
     <thead>
@@ -131,9 +178,26 @@
                     @Html.DisplayFor(modelItem => item.EndDate)
                 </td>
                 <td>
-                    <a asp-controller="SprintActivities" asp-action="Index" asp-route-id="@item.Id" asp-route-proyectId="@ViewBag.proyectId">Gestionar Actividades</a> -
-                    <a asp-action="EditSprint" asp-route-id="@item.Id" asp-route-proyectId="@ViewBag.proyectId">Edit</a>
-                    <a asp-action="DeleteSprint" asp-route-id="@item.Id" asp-route-proyectId="@ViewBag.proyectId">Delete</a>
+                    <a class="material-button__main" asp-controller="SprintActivities" asp-action="Index" asp-route-id="@item.Id" asp-route-proyectId="@ViewBag.proyectId">
+                        Gestionar Actividades
+                    </a>
+                    <a class="material-button__secondary" asp-action="EditSprint" asp-route-id="@item.Id" asp-route-proyectId="@ViewBag.proyectId">
+                        <span class="material-symbols-outlined">
+                            <span class="material-symbols-outlined">
+                                edit_note
+                            </span>
+                        </span>
+                    </a>
+                    <a class="material-button__secondary" asp-action="DeleteSprint" asp-route-id="@item.Id" asp-route-proyectId="@ViewBag.proyectId">
+                        <span class="material-symbols-outlined">
+                            <span class="material-symbols-outlined">
+                                delete
+                            </span>
+                        </span>
+                    </a>
+                    @*<a asp-controller="SprintActivities" asp-action="Index" asp-route-id="@item.Id" asp-route-proyectId="@ViewBag.proyectId">Gestionar Actividades</a> 
+                    <a asp-action="EditSprint" asp-route-id="@item.Id" asp-route-proyectId="@ViewBag.proyectId">Editar</a>
+                    <a asp-action="DeleteSprint" asp-route-id="@item.Id" asp-route-proyectId="@ViewBag.proyectId">Eliminar</a>*@
                 </td>
             </tr>
         }

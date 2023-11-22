@@ -14,7 +14,11 @@ namespace FerreteriaGHome.Web.Models
         [Display(Name = "Prioridad")]
         public int PriorityId { get; set; }
 
+        [Display(Name = "Estado")]
+        public int StateId { get; set; }
+
         public IEnumerable<SelectListItem> Priorities { get; set; }
+        public IEnumerable<SelectListItem> Statuses { get; set; }
 
     }
 }

@@ -3,12 +3,25 @@
 @{
     ViewData["Title"] = "usuarios";
 }
+<a class="material-back" asp-controller="Current" asp-action="Index" asp-route-id="@ViewBag.proyectId">
+    <span class="material-symbols-outlined">
+        arrow_back
+    </span>
+</a>
+<h2 class="title-current title-menu">Estudiantes Asignados</h2>
 
-<h1>Estudiantes Asignados</h1>
-
-<p>
-    <a asp-action="AddUser" asp-route-Id="@ViewBag.Id" asp-route-proyectId="@ViewBag.proyectId">Agregar un nuevo estudiante a la actividad</a>
+<p class="button-container">
+    <a class="material-button" asp-action="AddUser" asp-route-Id="@ViewBag.Id" asp-route-proyectId="@ViewBag.proyectId">
+        <span class="material-symbols-outlined">
+            add
+        </span>
+        Nuevo estudiante a la actividad
+    </a>
 </p>
+
+@*<p>
+    <a asp-action="AddUser" asp-route-Id="@ViewBag.Id" asp-route-proyectId="@ViewBag.proyectId">Agregar un nuevo estudiante a la actividad</a>
+</p>*@
 <table class="table">
     <thead>
         <tr>

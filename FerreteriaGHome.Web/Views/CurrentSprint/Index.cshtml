@@ -1,0 +1,115 @@
+﻿@model IEnumerable<FerreteriaGHome.Web.Data.Entities.Activity>
+
+@{
+    ViewData["Title"] = "Actividades";
+}
+<a class="material-back" asp-controller="Current" asp-action="Index" asp-route-id="@ViewBag.proyectId">
+    <span class="material-symbols-outlined">
+        arrow_back
+    </span>
+</a>
+
+<div class="sprint-container" style="margin-top:35px;">
+    <div class="sprint-info">
+        <p>
+            <strong>Nombre:</strong> @ViewBag.currentSprint.Name
+        </p>
+        <p>
+            <strong>Inicio:</strong> @ViewBag.currentSprint.StartDate
+        </p>
+        <p>
+            <strong>Finalización:</strong> @ViewBag.currentSprint.EndDate
+        </p>
+    </div>
+    <div class="sprint-img">
+        <img src="~/images/ControlImgs/book.png" width="160px" />
+    </div>
+</div>
+
+<br />
+<h3>Actividades</h3>
+
+@*<p>
+    <a asp-action="AddActivity" asp-route-Id="@ViewBag.Id" asp-route-proyectId="@ViewBag.proyectId">Agregar una nueva actividad al Sprint</a>
+</p>*@
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                Prioridad
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.File)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Observations)
+            </th>
+            <th>
+                Estado
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Priority.Description)
+                </td>
+                <td>
+                    @if (item.File != null && item.File.Length > 0)
+                    {
+                        <a href="@Url.Action("DownloadFile", "Activities", new { id = item.Id })">Descargar PDF</a>
+                    }
+                    else
+                    {
+                        <p>Sin evidencia</p>
+                    }
+                </td>
+                <td>
+                    @if (item.Observations != null && item.Observations.Length > 0)
+                    {
+                        @Html.DisplayFor(modelItem => item.Observations)
+                    }
+                    else
+                    {
+                        <p>Sin observaciones</p>
+                    }
+                </td>
+                <td>
+                    @if (item.Status.Description == "Pendiente")
+                    {
+                        <span style="color: red;">
+                            @Html.DisplayFor(modelItem => item.Status.Description)
+                        </span>
+                    }else
+                    {
+                        @Html.DisplayFor(modelItem => item.Status.Description)
+                    }
+                </td>
+                <td>
+                    <a class="material-button" asp-action="EditStateFromActivity" asp-route-Id="@item.Id" asp-route-proyectId="@ViewBag.proyectId">
+                        <span class="material-symbols-outlined">
+                            edit_note
+                        </span>
+                        Estado/Evidencia
+                    </a>
+                    @*<a asp-action="EditStateFromActivity" asp-route-Id="@item.Id" asp-route-proyectId="@ViewBag.proyectId">Editar Estado/Evidencia</a>*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

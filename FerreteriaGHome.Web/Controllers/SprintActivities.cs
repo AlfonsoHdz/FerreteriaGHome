@@ -39,12 +39,26 @@ namespace FerreteriaGHome.Web.Controllers
             ViewBag.proyectId = proyectCurrentId;
             ViewBag.Id = sprintCurrentId;
 
-            var usersInActivity = _context.SprintActivities
-                .Where(au => au.SprintId == Id)
-                .Select(au => au.Activity)
+            var activities = _context.SprintActivities
+               .Where(au => au.SprintId == Id)
+               .Select(au => au.Activity)
+               .ToList();
+
+            var activityIds = activities.Select(au => au.Id).ToList();
+
+            var priorities = _context.Activities
+                .Where(a => activityIds.Contains(a.Id))
+                .Include(a => a.Priority)
                 .ToList();
 
-            return View(usersInActivity);
+            foreach(var activity in activities)
+            {
+                var priority = priorities.FirstOrDefault(p => p.Id == activity.Id);
+                if (priority != null)
+                    activity.Priority = priority.Priority;
+            }
+
+            return View(activities);
         }
 
 
@@ -70,6 +84,7 @@ namespace FerreteriaGHome.Web.Controllers
             var activityNotInSprint = _context.Activities
                 .Include(p => p.Priority)
                 .Where(u => !_context.SprintActivities.Any(au => au.SprintId == Id && au.ActivityId == u.Id))
+                .Where(u => !_context.SprintActivities.Any(au => au.ActivityId == u.Id))
                 .Where(u => _context.ProyectActivities.Any(pu => pu.ProyectId == proyectId && pu.ActivityId == u.Id))
                 .ToList();
 
@@ -110,6 +125,21 @@ namespace FerreteriaGHome.Web.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", new { id = Id, proyectid = proyectId });
             }
+            return RedirectToAction("Index", new { id = Id, proyectid = proyectId });
+        }
+
+        public async Task<IActionResult> RemoveActivityFromSprint(int Id, int proyectId, int activityId)
+        {
+            var existAssociation = await _context.SprintActivities
+               .Where(pu => pu.SprintId == Id && pu.ActivityId == activityId)
+               .FirstOrDefaultAsync();
+
+            if (existAssociation != null)
+            {
+                _context.SprintActivities.Remove(existAssociation);
+                await _context.SaveChangesAsync();
+            }
+
             return RedirectToAction("Index", new { id = Id, proyectid = proyectId });
         }
     }

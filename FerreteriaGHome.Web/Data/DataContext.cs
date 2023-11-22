@@ -15,6 +15,7 @@ namespace FerreteriaGHome.Web.Data
         public DbSet<Activity> Activities { get; set; }
         public DbSet<Sprint> Sprints { get; set; }
         public DbSet<Priority> Priorities { get; set; }
+        public DbSet<Status> Statuses { get; set; }
         public DbSet<Career> Careers { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Student> Students { get; set; }

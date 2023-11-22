@@ -4,11 +4,25 @@
         ViewData["Title"] = "Actividades";
     }
 
-    <h1>Actividades Asignadas</h1>
+<a class="material-back" asp-controller="Current" asp-action="Index" asp-route-id="@ViewBag.proyectId">
+    <span class="material-symbols-outlined">
+        arrow_back
+    </span>
+</a>
 
-    <p>
+<h1 class="title-current title-menu">Actividades Asignadas</h1>
+
+<p class="button-container">
+    <a class="material-button" asp-action="AddActivity" asp-route-Id="@ViewBag.Id" asp-route-proyectId="@ViewBag.proyectId">
+        <span class="material-symbols-outlined">
+            add
+        </span>
+        Nueva actividad al Sprint
+    </a>
+</p>
+   @* <p>
         <a asp-action="AddActivity" asp-route-Id="@ViewBag.Id" asp-route-proyectId="@ViewBag.proyectId">Agregar una nueva actividad al Sprint</a>
-    </p>
+    </p>*@
     <table class="table">
         <thead>
             <tr>
@@ -57,7 +71,7 @@
                         @Html.DisplayFor(modelItem => item.Observations)
                     </td>
                     <td>
-                        <a asp-action="RemoveActivityFromSprint" asp-route-Id="@ViewBag.Id" asp-route-proyectId="@ViewBag.proyectId" asp-route-userId="@item.Id">Eliminar</a>
+                    <a asp-action="RemoveActivityFromSprint" asp-route-Id="@ViewBag.Id" asp-route-proyectId="@ViewBag.proyectId" asp-route-activityId="@item.Id">Eliminar</a>
                     </td>
                 </tr>
             }

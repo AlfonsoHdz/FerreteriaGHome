@@ -4,11 +4,17 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Listado de Proyectos</h1>
+<h1 class="title-menu">Listado de Proyectos</h1>
 
-<p>
-    <a asp-action="Create">Agregar</a>
+<p class="button-container">
+    <a asp-action="Create" class="material-button">
+        <span class="material-symbols-outlined">
+            add
+        </span>
+        Agregar
+    </a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
@@ -37,9 +43,23 @@
                 @Html.DisplayFor(modelItem => item.CreationDate)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a class="material-button__secondary" asp-action="Edit" asp-route-id="@item.Id">
+                        <span class="material-symbols-outlined">
+                            <span class="material-symbols-outlined">
+                                edit_note
+                            </span>
+                        </span>
+                    </a>
+                    <a class="material-button__secondary" asp-action="Delete" asp-route-id="@item.Id">
+                        <span class="material-symbols-outlined">
+                            <span class="material-symbols-outlined">
+                                delete
+                            </span>
+                        </span>
+                    </a>
+                @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
             </td>
         </tr>
 }

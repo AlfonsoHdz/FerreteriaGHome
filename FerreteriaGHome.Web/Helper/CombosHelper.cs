@@ -50,8 +50,24 @@ namespace FerreteriaGHome.Web.Helper
             return list;
         }
 
+        public IEnumerable<SelectListItem> GetComboStatuses()
+        {
+            var list = this.dataContext.Statuses.Select(b => new SelectListItem
+            {
+                Text = b.Description,
+                Value = $"{b.Id}"
+            }).ToList();
+            list.Insert(0, new SelectListItem
+            {
+                Text = "Selecciona el estado",
+                Value = "0"
+            });
 
-      
+            return list;
+        }
+
+
+
 
 
 

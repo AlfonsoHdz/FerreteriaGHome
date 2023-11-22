@@ -10,7 +10,8 @@ namespace FerreteriaGHome.Web.Helper
     {
         public IEnumerable<SelectListItem> GetComboRoles();
         public IEnumerable<SelectListItem> GetComboPriorities();
+        public IEnumerable<SelectListItem> GetComboStatuses();
 
-       
+
     }
 }

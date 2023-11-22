@@ -55,6 +55,13 @@ namespace FerreteriaGHome.Web.Data
                 await CheckPriorities("Baja");
             }
 
+            if (!this.dataContext.Statuses.Any())
+            {
+                await CheckStatuses("Pendiente");
+                await CheckStatuses("Proceso");
+                await CheckStatuses("Finalizada");
+            }
+
 
         }
 
@@ -76,6 +83,13 @@ namespace FerreteriaGHome.Web.Data
         private async Task CheckPriorities(string name)
         {
             this.dataContext.Priorities.Add(new Priority { Description = name });
+
+            await this.dataContext.SaveChangesAsync();
+        }
+
+        private async Task CheckStatuses(string name)
+        {
+            this.dataContext.Statuses.Add(new Status { Description = name });
 
             await this.dataContext.SaveChangesAsync();
         }
